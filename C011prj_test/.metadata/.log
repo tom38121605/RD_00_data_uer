@@ -1,0 +1,24 @@
+!SESSION 2023-11-20 14:34:57.325 -----------------------------------------------
+eclipse.buildId=Version 1.12.1
+java.version=11.0.17
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-11-20 14:35:34.004
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-11-20 14:35:34.166
+!MESSAGE Log4j2 initialized with config file D:\workspace12b\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-11-20 14:35:45.028
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-11-20 14:38:35.918
+!MESSAGE Indexed 'prj1' (16 sources, 105 headers) in 11.8 sec: 10,010 declarations; 32,807 references; 1 unresolved inclusions; 66 syntax errors; 240 unresolved names (0.56%)
+
+!ENTRY org.eclipse.core.resources 4 368 2023-11-20 15:33:53.510
+!MESSAGE Variable references non-existent resource : ${workspace_loc:/prj1/Release/prj1.hex}
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-11-20 15:38:03.708
+!MESSAGE Indexed 'prj1' (16 sources, 105 headers) in 21 sec: 10,010 declarations; 32,807 references; 1 unresolved inclusions; 66 syntax errors; 240 unresolved names (0.56%)

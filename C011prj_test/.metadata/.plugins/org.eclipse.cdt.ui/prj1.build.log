@@ -1,0 +1,10 @@
+16:03:49 **** Incremental Build of configuration Release for project prj1 ****
+make -j4 all 
+arm-none-eabi-size   prj1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   3492	     12	   1572	   5076	   13d4	prj1.elf
+Finished building: default.size.stdout
+ 
+
+16:03:50 Build Finished. 0 errors, 0 warnings. (took 1s.193ms)
+

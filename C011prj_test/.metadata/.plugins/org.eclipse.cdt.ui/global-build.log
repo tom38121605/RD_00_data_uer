@@ -1,0 +1,26 @@
+16:01:34 **** Incremental Build of configuration Release for project prj1 ****
+make -j4 all 
+arm-none-eabi-gcc -o "prj1.elf" @"objects.list"   -mcpu=cortex-m0plus -T"D:\workspace12b\prj1\STM32C011F6UX_FLASH.ld" --specs=nosys.specs -Wl,-Map="prj1.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: prj1.elf
+ 
+arm-none-eabi-size   prj1.elf 
+arm-none-eabi-objdump -h -S  prj1.elf  > "prj1.list"
+   text	   data	    bss	    dec	    hex	filename
+   3492	     12	   1572	   5076	   13d4	prj1.elf
+arm-none-eabi-objcopy  -O ihex  prj1.elf  "prj1.hex"
+Finished building: default.size.stdout
+ 
+arm-none-eabi-objcopy  -O binary  prj1.elf  "prj1.bin"
+Finished building: prj1.list
+ 
+Finished building: prj1.hex
+Finished building: prj1.bin
+ 
+ 
+16:03:49 **** Incremental Build of configuration Release for project prj1 ****
+make -j4 all 
+arm-none-eabi-size   prj1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   3492	     12	   1572	   5076	   13d4	prj1.elf
+Finished building: default.size.stdout
+ 
