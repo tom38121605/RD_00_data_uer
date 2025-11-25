@@ -1,4 +1,4 @@
-参考文档： Instrument EFT Instructions.pdf
+﻿参考文档： Instrument EFT Instructions.pdf
 
 以pointer来说明（12668B）
 
@@ -65,9 +65,11 @@
 
 ---------------------------------------- pointer的eft测试  ----------------------------------------------
 
-0. 在firmware_updater中，更新下面的软件到11663B   （详细的夹具和过程待完善）
-
+0. 在firmware_updater中，更新下面的软件到11663B  
    11663B-1p_microsd_2v8-standard-3p0mm-PID65-v7010.zip
+
+0. 安装 electronics_functional_test_app_v1.0.3.msi
+
 
 
 1. 硬件连接  
@@ -84,7 +86,7 @@
    。把Pointer 板插入到夹具里面
    。连上pointer板的电源，亮几下黄灯，说明11663B已把程序更新烧录到pointer里面
 
-   。在电脑上运行 EFT GUI， V0.0.1   //最新为V1.0.4  (工厂使用的好像是V1.0.3 -- 待验证)
+   。在电脑上运行 EFT GUI， V1.0.3  //曾用旧的V0.0.1  ，但V1.0.4实测不能使能
    。点击 “Device EFT” 选项卡
    。在SIU Type，选择 “11663B SINGLE PORT SIU”
    。在Device Type 选择 “12668B POINTER SENSOR AND BUTTON BOARD”
@@ -119,7 +121,8 @@
 问题2：测试按键时，出现错误提示
 解决：加上synch线，即ok
  
-
+问题3：测试eft时，点击“run test”，出现no device info， 加了焊锡后还有该问题
+解决： 把11663B的固件，从V7004 RC3 更新到V7010版本，即ok
 
 
 
