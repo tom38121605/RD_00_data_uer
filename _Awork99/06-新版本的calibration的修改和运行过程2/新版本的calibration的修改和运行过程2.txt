@@ -1,0 +1,52 @@
+
+
+0. 把C:\workspace\cnctestapplicationtestfiles目录，copy到C:\workspace\cnctestapplication下面
+0. 把C:\workspace\cnctestapplication\bin下面的目录Release NO VISA修改成 Release
+
+
+1. 修改C:\workspace\ommo_python_core\UI\device_calibration_gui.py
+
+    。把93到98注释了，这个功能用不着
+
+          #with CNCTestAppRunner(self.cnctestapp_path) as cnctestapp:
+    
+          #    success, version = cnctestapp.check_cnctestapp_version()
+     
+          #    if not success or semver.compare(version[1:], CNCTESTAPP_VERSION) &lt; 0:
+      
+          #        alert_window("CNCTestApp Outdated", "Please update your CNCTestApp version to v{0} or above.".format(CNCTESTAPP_VERSION))
+      
+          #        exit(0)
+
+    。把 fixture_id 是由60改成14：   （下面两种方法）
+
+        方法1 . 修改C:\workspace\cnctestapplication\bin\Release\config.json  (推荐)
+                  "FixtureID": 14
+   
+        方法2 . 修改C:\workspace\ommo_python_core\UI\utils\test_file_filter_combobox.py   
+           #settings_file_path = os.path.join(settings_file_folder, f"cnctestapplication_settings_{fixture_id}.json")
+
+           settings_file_path = os.path.join(settings_file_folder, f"cnctestapplication_settings_14.json")
+ 
+    。把fixture_id下一行的fixture_type也改一下
+
+fixture_type = 'Coil'
+
+再试试   （没动，忽略）
+
+
+2. 修改C:\workspace\ommo_python_core\ommo_io_defs.py
+
+   。在class Hardware(Enum):下面加入
+       #HW_13335 = '13335 48 PORT SIU', pb.SIU_PID_13335_12P_SENSOR_CAL, True, True
+
+       HW_13335 = '13335 48 PORT PALLET FIXTURE', pb.SIU_PID_13335_12P_SENSOR_CAL, True, True
+
+3. 运行C:\workspace\ommo_python_core\UI\device_calibration_gui.py，即ok  （会跳出最新的calibration的界面）
+
+
+
+
+
+
+

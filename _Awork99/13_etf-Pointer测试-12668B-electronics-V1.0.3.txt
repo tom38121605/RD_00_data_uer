@@ -1,0 +1,127 @@
+
+以pointer来说明（12668B）
+
+参考文档： Instrument EFT Instructions.pdf
+
+说明1：4Pin的jlink连接线，两边边黑条面向白板，夹具一边面向红手柄 
+说明2：8Pin的sd板连接线，两边彩条面向白板，夹具一边面向红手柄 
+说明3：sk卡板，印字的一边，面向吕片
+
+
+0. 11663目前实际使用的版本
+   11663B-1p_microsd_2v8-standard-3p0mm-PID65-v7004_RC3.zip 
+
+0. pointer的bootloader文件
+   secured_sampler_01_otp_bootloader-00.07-036bfbd.hex
+
+
+
+
+（一直寻找一次完整测试的过程 -- 待完善）
+
+0. 先按照 “Segger Flasher ARM Secure Use” ，烧录 bootloader的hex文件     //就是把加密了的hex，先下载到flasher arm烧录器里 
+
+0. 各大部件
+
+   。13512 Pointer EFT Fixture
+   。8 pin JST cable
+   。12595A Micro SD to JST adapter
+   。11663B Micro SD SIU
+   。Breakout Board
+   。4 pin JST cable
+   。JLink breakout Board
+   。Jlink (SEGGER Flasher)   蓝色jlink
+
+
+
+---------------------------------------- 烧录pointer 的bootloader  ----------------------------------------------
+
+
+一。 普通jlink烧录
+
+    硬件连接
+    烧录过程
+
+二。 蓝色jlink烧录
+
+    硬件连接
+    烧录过程
+
+
+2. 先用蓝色jlink，把bootloader烧录到pointer里面  （自己可用普通jlink，下面两者都做了说明）
+
+   。使用夹具13512
+   。使用的普通jlink，注意3.3v可供电                                       //蓝色jlink则需另外供电 -- 或通过11663B供电 -- 待测试验证)
+   。把jlink一端连sd小板12595，再连8Pin线到夹具，jlink另一端连接电脑       //蓝色jlink另一端不需接电脑，只需接一个usb电源
+   。在电脑上打开jfash软件 -- 打开下面的bootloader文件 -- connect(如提示擦除protect则按yes) -- 菜单Target\production programming (一般显示成功烧录)  //蓝色jlink直接按Prog  
+      secured_sampler_01_otp_bootloader-00.07-036bfbd.hex
+
+
+---------------------------------------- pointer的eft测试  ----------------------------------------------
+
+
+1. 硬件连接  （待完善）
+  
+    。一定要接synch线
+    。
+    。
+    。
+    。
+    。
+
+3. 更新下面的软件到11663B   （详细的夹具和过程待完善）
+
+   文档里面的版本
+   11663B-1p_microsd_2v8-standard-3p0mm-PID65-v7000_RC0.zip
+
+   实际使用的版本
+   11663B-1p_microsd_2v8-standard-3p0mm-PID65-v7004_RC3.zip   //Morgan用的是V7006 RC1(忽略)
+
+
+4. 功能测试
+   。断开pointer板的电源
+   。把Pointer 板插入到夹具里面
+   。连上pointer板的电源，亮几下黄灯，说明11663B已把程序更新烧录到pointer里面
+   。在电脑上运行 EFT GUI， V0.0.1   //最新为V1.0.4  (工厂使用的好像是V1.0.3 -- 待验证)
+   。点击 “Device EFT” 选项卡
+   。在SIU Type，选择 “11663B SINGLE PORT SIU”
+   。在Device Type 选择 “12668B POINTER SENSOR AND BUTTON BOARD”
+   。点击Setup
+   。 跳出弹出框意味着会写入"device info"到 pointer pcb. 按 “OK”
+   。会在下面显示  list of 预期的 ICs
+   。点击Run Test
+   。会看到弹出下面的对话框： 已成功把"device info"写入到已连接的设备中
+   。点击Ok
+   。在“IC Count Test Results”窗口里面，所有的选项都要pass。然后下一步测试按键
+   。上面的都pass后，开始测试按键
+   。点击"pending button test"      //待验证
+   。观察右边“button test result”上面的蓝色状态栏
+   。在默认状态按button，pass    //待验证
+   。按键往上，按button，pass
+   。按键往下，按button，pass
+   。按键往右，按button，pass
+   。按键往左，按button，pass
+   。总的，pass
+   。ok
+
+
+
+注意1： 1k上拉电阻的跳线帽要短接  （MISO线？）
+
+
+
+
+
+
+问题1：测试eft时，点击“run test”，出现no device info
+解决： 对pointer板加了焊锡，即ok
+
+问题2：测试按键时，出现错误提示
+解决：加上synch线，即ok
+ 
+
+
+
+
+
+

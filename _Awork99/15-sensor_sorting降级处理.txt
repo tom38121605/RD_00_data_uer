@@ -1,0 +1,55 @@
+
+原因的实现目标：
+
+。因认证需要，Shenji需要较旧的固件版本 
+。因BL，设备的数据结构发生了变化
+。7xxx SIU（11663B V7010） 读取 device info                                   //***
+。读取的device info传到pc的gui软件，gui软件再把device info数据结构转换
+。pc把数据结构转换后的device info传给5xxx SIU（11663B V5027）
+。5xxx SIU（11663B V5027）把新的device info，写回到sensor板中，并验证         //***     
+
+
+
+硬件连接：
+   。14180夹具的两个公头分别接两块11663B板子的一端 ，两块11663B板子另一端分别连接电脑的两个usb口
+   。14180夹具的母头，连接已封塑的sensor，确保SD卡接口的方向正确
+   。sensor必须来自三华生产线，必须拥有正确的 "manufacturing info"信息
+
+
+软件操作：
+
+1. 把两块相同的单口的板子（本次选用11663B），连接在14180的降级夹具上。
+2. 一块11663B烧录v5027的版本，一块11663B的板子烧录V7010的版本
+
+3. 安装下面的pc软件sensor sorting gui
+   sensor_sorting_app_v0.0.0_directus_disabled_3d956db.msi
+4. 在目录 C:/Program Files (x86)/Ommo Technologies/Sensor Sorting GUI，打开 sensor_sorting.ini 
+5. 在文件末尾，添加"development=1"
+6. 打开pc软件sensor sorting
+
+7. 选择你现在使用的SIU型号 （如11663B）
+8. 点击“downgrade”
+9. 如果成功，则会看到一个成功的信息
+
+
+  
+
+
+
+
+
+=================================参考================================================
+
+1. Connect exactly 2 sius (single port) to the 14180 downgrade fixture
+2. Make sure one siu has 7010 firmware, while the other has 5027 firmware
+
+3. Install the included sensor sorting gui
+4. Open the sensor_sorting.ini file in C:/Program Files (x86)/Ommo Technologies/Sensor Sorting GUI/
+
+5. Add the variable "development=1" at the end of the file.
+6. Open the GUI
+7. Select the SIU you are using (11663B, or 11952D, or any other one you may have)
+8. Click downgrade
+9. You should see a downgrade success, message, or an error message - depending on the case.
+
+

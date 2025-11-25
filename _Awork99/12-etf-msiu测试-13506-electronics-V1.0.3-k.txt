@@ -1,0 +1,187 @@
+
+Jlink 4pin线插入方向：公头的白板面向母座的宽面  （两边都一样）
+LCD板， 在lcd端粗条花纹朝下，master板也是粗条花纹朝下
+
+
+现在最新版本是electronics_functional_test_app_v1.0.4.msi
+   。bootloader烧录的这一步，用蓝色的jlink烧录代替
+   。烧录的软件版本为v7006_RC1.hex  （含bootloader和zip）
+   。不需要考虑nrfutil.exe文件
+
+
+0.  安装 firmware_updater_v3.1.0_external.msi  （注意：是 external ）
+0.  安装 electronics_functional_test_app_v1.0.3.msi            
+0.  安装 nrf-command-line-tools-10.24.2-x64.exe  （一路默认安装）
+0.  把nrfutil.exe, 拷贝到目录“C:\Program Files\Nordic Semiconductor\nrf-command-line-tools\bin”里
+0.  安装JLink_Windows_V866_x86_64.exe
+    最新版： https://www.segger.com/downloads/jlink/JLink_Windows_x86_64.exe
+
+0. 烧录11663B的软件
+   11663B-1p_microsd_2v8-standard-3p0mm-PID65-v7004_RC3.zip   //Morgan用的是V7006 RC1
+
+0.  打开目录"C:/Program Files (x86)/Ommo Technologies/Electronics Functional Test App"里的electronics_functional_test.ini文件，检查下面内容
+
+    [DEFAULT]
+    log_files_directory=c:/workspace/logs/
+    NRFUTIL_PATH=C:/Program Files/Nordic Semiconductor/nrf-command-line-tools/bin/nrfutil.exe
+    NRFJPROG_ROOT=C:/Program Files/Nordic Semiconductor/nrf-command-line-tools/bin/nrfjprog
+    MBR_HEX=C:/workspace/ommo_nrf/nRF5_SDK_17.1.0_ddde560/components/softdevice/mbr/hex/mbr_nrf52_2.4.1_mbr.hex
+
+
+0. 拷贝 C:\workspace\ommo_nrf目录到测试电脑 ，确认flash_files里面有最新的13506和12359的V7004 RC5版本    (最新为V7010)
+    13506-master_siu_2v8-bootloader-PID79-v7004_RC5.hex
+    13506-master_siu_2v8-ef_test-3p0mm-PID79-v7004_RC5.zip
+    13506-master_siu_2v8-standard-3p0mm-PID79-v7004_RC5.zip
+    mbr_nrf52_2.4.1_mbr.hex
+
+   12359-usbc_charger_tester_3v3-bootloader-PID75-v7004_RC5.hex
+   12359-usbc_charger_tester_3v3-standard-PID75-v7004_RC5.zip
+
+
+0. 删除下面的目录  //先跳过   (暂不考虑)
+   。C:\workspace\ommo_nrf\nRF5_SDK_17.1.0_ddde560\examples\ommo
+   。C:\workspace\ommo_nrf\nRF5_SDK_17.1.0_ddde560\components\ommo
+
+   。C:\workspace\ommo_nrf\nRF5_SDK_17.1.0_ddde560\examples\peripheral\ommo_active_pulse
+   。C:\workspace\ommo_nrf\nRF5_SDK_17.1.0_ddde560\examples\peripheral\ommo_spi_i3c_prototype
+   。C:\workspace\ommo_nrf\nRF5_SDK_17.1.0_ddde560\examples\peripheral\ommo_spi_imu42605
+   。C:\workspace\ommo_nrf\nRF5_SDK_17.1.0_ddde560\config\ommo
+
+
+
+0. 下面的文件拷贝到目录：C:\Program Files (x86)\Ommo Technologies\Firmware Updater App  //备用，在V1.0.3版本中没有用到  (暂不考虑)
+    settings.json
+
+0. 修改electronics app  的settings.json文件，版本号修改成下面的内容    //备用，在V1.0.3版本中没有用到   (暂不考虑)
+    13506-master_siu_2v8-bootloader-PID79-v7004_RC5.hex      
+    13506-master_siu_2v8-ef_test-3p0mm-PID79-v7004_RC5.zip
+    13506-master_siu_2v8-standard-3p0mm-PID79-v7004_RC5.zip
+
+    （最新版本为V7006 RC1）
+
+
+0. 烧录最新的固件版本 V7004 RC5到 12359-B-00 charge test （带液晶屏的充电板）
+   12359-usbc_charger_tester_3v3-bootloader-PID75-v7004_RC5.hex
+   12359-usbc_charger_tester_3v3-standard-PID75-v7004_RC5.zip
+
+0. 烧录10273的hex文件 （同步信号发送板）
+   这个hex文件在github上没有，是ommo通过微信或邮件发送给Bun的 （或也可以通过源程序编译生成）
+
+
+0. 把MSIU EFT fixture板，sync generator板，Jlink烧录器， charger test板 连在一起，再通过usb hub连接到电脑
+
+0.  横向开关， 拨到SWD档        (另一边是  USB)
+0.  纵向开关1，拨到VBUS档       (另一边是  OFF)
+0.  纵向开关2，拨到PD档         (另一边是  SYNC)
+
+//0. 补充： 检查 nrfutil.exe在下面的目录里      //这一步一般可忽略 安装firmware时自动带入
+      C:\Program Files (x86)\Ommo Technologies\Firmware Updater App\utils\Scripts
+      C:\Program Files\Nordic Semiconductor\nrf-command-line-tools\bin
+
+
+
+
+一。烧录13506的bootloader，更新zip文件 （当前版本 V7005 RC5）
+
+   0. 连接jlink和usb hub两条线到电脑的两个usb接口
+
+   1. 运行 Ommo Electronics Functional Test App
+   1. 在Unit Number，输入1
+   1. 勾选checkbo“Upload Bootl，其他都不选
+   1. 选择要烧录的文件： “13506-master_siu_2v8-bootloader-PID79-v7004_RC5.hex”
+   1. 点击“run”
+   1. 如果下面显示绿色的successful信息，则表示烧录bootloader成功
+
+
+   2. 在master firmware updater中， 烧写bootload      //横向开关拨向SWD端
+      。有时要先点一下上面的stop update
+
+   3. 在MISU EF Test Firmware Update中， 自动更新eft的zip文件       //横向开关拨向USB端  （这个功能也可以在master firmware updater中操作）
+
+
+
+二。测试electric 
+
+   1. 请看文档 MSIU EFT Instructions v0.0.2_250909
+
+      。看红绿蓝三色小灯闪烁， 按 yes
+      。看电流75mA-100m，按yes
+      。一直按下Hold，点ok, 进行测试
+      。放开Hold，点ok, 进行测试
+      。USB POWER开关拨到OFF档，按OK, 进行测试
+      。PD开发拨到SYNC档，按OK, 进行测试
+
+          ...... (待定大约10秒)
+
+      。PD开发拨到PD档
+      。USB POWER开关拨到VBUS档
+
+     。成功的话，会显示 "EF TEST PASSED"
+
+
+
+补充一：目前的3pin线，4pin线，接MSIU fixture端，都是白屏朝上
+
+
+补充二， 校准写入uuid          //看是否需要   (工厂新板子不需要 -- 暂不考虑)
+
+
+    参考： 校准标记05-通过python校准-Mihir.txt
+
+
+
+
+补充三： （关于最后两步）  //暂未遇到 -- 待验证
+
+    注意：在接下来的两次测试中，MSIU 将自动关闭电源，然后重新打开。如果开关顺序出现错误，MSIU 可能会卡在电源关闭状态。
+          如果发生这种情况，请按照附录中列出的步骤重置 MSIU 硬件，然后重新启动测试。另请参阅附录中常见的错误模式描述。
+
+
+
+附录：（暂未遇到 -- 待验证）
+
+1. 如果 MSIU 卡在电源开关顺序中，请按以下步骤重置它：   
+   。将 PD 开关切换至 PD 模式
+   。点击“运行测试” - 由于上一个测试仍在继续，您将遇到错误。
+   。将 USB 开关切换至“关闭”模式
+   。点击“运行测试” - 由于上一个测试仍在继续，您将遇到错误。  //多次
+   。您可能需要第三次点击“运行测试”，这也会导致错误。
+   。最后，再次点击“运行测试”。当您看到不同的测试结果出现时，表示 MSIU 已成功重置，您可以继续测试。
+
+
+
+情况1：
+
+   。如果测试正在运行，并且在单击“确定”之前其中一个开关未设置到正确的位置，则会显示此消息。
+   。如果您看到此消息，请按照上面提到的说明重置 MSIU 硬件。
+   。如果再次遇到此消息，并且开关已正确设置，则将此 MSIU 单元视为 EFT -“FAIL”
+
+
+情况2：
+
+   。如果您看到此消息 - “EF 测试开始消息未读！”，这表明测试没有从头开始，并且 MSIU 卡在了电源关闭/打开序列中
+   。如果您看到此消息，请按照上面提到的说明重置 MSIU 硬件。
+   。如果再次遇到此消息，并且开关已正确设置，则将此 MSIU 单元视为 EFT -“FAIL”。
+
+
+情况3：
+   。如果您看到此消息
+     a. 首先，请确保连接正确，如“设置”部分所述。
+     b. 如果您仍然看到此消息，则可能是 MSIU 卡在了电源开/关序列中。
+   。按照上述说明重置 MSIU 硬件。
+
+
+情况4：
+   。如果软件在此屏幕上等待超过几秒钟，请等待一段时间以允许软件重置并显示以下错误消息
+   。下次单击“运行测试”时，软件将恢复功能。
+
+
+
+
+
+
+
+
+
+
+

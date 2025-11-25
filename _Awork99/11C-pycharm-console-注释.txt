@@ -1,0 +1,108 @@
+C:\workspace\test_scripts\venv\Scripts\python.exe C:\workspace\test_scripts\emc_ommo_app_data_analysis_40hz_brainlab_metrics.py   //本python文件路径
+
+C:\workspace\test_scripts\emc_ommo_app_data_analysis_40hz_brainlab_metrics.py:16: SyntaxWarning: invalid escape sequence '\d'
+  file_name = "C:\\workspace\\ommo_eval_sdk_v0.20.2\\ommo_app\data\\data0.hdf5"                                                                   //数据文件路径
+
+INFO:root:file=C:\workspace\ommo_eval_sdk_v0.20.2\ommo_app\data\data0.hdf5       //数据文件路径
+
+INFO:root:devices=<KeysViewHDF5 ['Device_3528137102_0', 'Device_3528137102_1', 'Device_3751251617_0', 'Device_3751251617_1']>
+
+
+INFO:root: t0_all=[3867358430 3867358430 3868061726 3868061726] t0=3867358430 t0_device_idx=[0 1]
+INFO:root: device:/Device_3751251617_1
+
+INFO:root:start time=0.043956 end time=19.927053 samples=19292
+INFO:root:(19292,)
+INFO:root:(19292, 1)
+INFO:root:(19292, 1, 3)
+INFO:root:position delta vector = [ 2.68074382e-04 -2.29835507e-06  1.82038366e-03]
+INFO:root:position delta magnitude = 0.001840017884701622
+INFO:root:index 795 is out of bounds for axis 0 with size 795
+
+INFO:root: Timestamp deltas:[ 15984  79920 143856 207792 271728]
+ counts:[19159   115    14     2     1]
+
+INFO:root:Encoder events:[ 2.294703  2.769228  3.944052  6.669324  8.419572  8.619372  8.819172
+ 10.06992  10.76922  10.96902  11.544444 12.018969 12.094893 12.319668
+ 12.569418 13.494492 16.119864 16.394589]
+INFO:root: Encoder deltas:[-1756   870   980  1086  1139  1193  1194  1195  1196  1198  1247  1248
+  1250  1251  1302  1303  1304  1306  1307  1355  1356  1357  1358  1359
+  1360  1361  1362  1410  1411  1412  1413  1414  1415  1464  1466  1467
+  1469  1518  1519  1520  1522  1523  1525  1575  1577  1683  1738]
+ counts:[  1   1   1   1   2   4   1   4   3   1   1   2   1   2   1   1   2   2
+   1  31 176 116  83 123 115  70   1   5   5   4   2   3   5   1   2   1
+   2   1   2   3   4   1   1   2   1   1   1]
+INFO:root:start_position=[247.55234 158.282   -22.82755]
+INFO:root: position over +/-1mm:[]
+INFO:root:METRICS:
+INFO:root:FAIL: 90% of data without indicator value test: 100.0% of samples triggered indicator value
+INFO:root:PASS: 2-second tracking loss test (allowed: 0 instances): 0 instances of 2 second data loss
+INFO:root:PASS: any-duration tracking loss test (allowed: 1 instance): 0 instances of data loss
+INFO:root:FAIL: 99% accurracy test (threshold 1mm): all data thrown out by indicator value
+INFO:root:FAIL: indicator value false negative test (threshold 1%): all data thrown out by indicator value
+INFO:root:FAIL: indicator value false positive test (threshold 10%): 100.0% false positive rate (0.1 indicator value with no 1mm deviation)
+INFO:root:tests failed: 2
+INFO:root: device:/Device_3528137102_0
+INFO:root:start time=0.0 end time=19.902078 samples=19874
+INFO:root:(19874,)
+INFO:root:(19874, 1)
+INFO:root:(19874, 1, 3)
+INFO:root:position delta vector = [ 0.00459789 -0.00428158  0.00601252]
+INFO:root:position delta magnitude = 0.008696145148259227
+INFO:root:index 794 is out of bounds for axis 0 with size 794
+INFO:root: Timestamp deltas:[ 15984  31968  63936  79920  95904 143856]
+ counts:[19861     1     1     8     1     1]
+INFO:root:Encoder events:[ 2.169828  2.294703  2.769228  3.944052  6.669324  8.419572  8.619372
+  8.819172 10.06992  10.76922  10.96902  11.544444 12.018969 12.094893
+ 12.319668 12.569418 13.494492 16.119864 16.394589]
+INFO:root: Encoder deltas:[-1756   870   978   980  1086  1139  1193  1194  1195  1196  1198  1247
+  1248  1250  1251  1302  1303  1304  1306  1307  1355  1356  1357  1358
+  1359  1360  1361  1362  1410  1411  1412  1413  1414  1415  1464  1466
+  1467  1469  1518  1519  1520  1522  1523  1525  1575  1577  1683  1736
+  1738]
+ counts:[  1   1   1   1   1   2   4   1   4   3   1   1   2   1   3   1   1   2
+   2   1  31 175 115  82 123 113  70   1   5   5   4   2   3   5   1   3
+   1   2   1   2   3   4   1   1   2   1   1   1   1]
+INFO:root:start_position=[ -13.289963 -177.43358   -19.963343]
+INFO:root: position over +/-1mm:[]
+INFO:root:METRICS:
+INFO:root:FAIL: 90% of data without indicator value test: 100.0% of samples triggered indicator value
+INFO:root:PASS: 2-second tracking loss test (allowed: 0 instances): 0 instances of 2 second data loss
+INFO:root:PASS: any-duration tracking loss test (allowed: 1 instance): 0 instances of data loss
+INFO:root:FAIL: 99% accurracy test (threshold 1mm): all data thrown out by indicator value
+INFO:root:FAIL: indicator value false negative test (threshold 1%): all data thrown out by indicator value
+INFO:root:FAIL: indicator value false positive test (threshold 10%): 100.0% false positive rate (0.1 indicator value with no 1mm deviation)
+INFO:root:tests failed: 2
+INFO:root: device:/Device_3528137102_1
+INFO:root:start time=0.0 end time=19.902078 samples=19874
+INFO:root:(19874,)
+INFO:root:(19874, 1)
+INFO:root:(19874, 1, 3)
+INFO:root:position delta vector = [ 0.00153511 -0.00717128  0.00677804]
+INFO:root:position delta magnitude = 0.009986272035220905
+INFO:root:index 794 is out of bounds for axis 0 with size 794
+INFO:root: Timestamp deltas:[ 15984  31968  63936  79920  95904 143856]
+ counts:[19861     1     1     8     1     1]
+INFO:root:Encoder events:[ 2.169828  2.294703  2.769228  3.944052  6.669324  8.419572  8.619372
+  8.819172 10.06992  10.76922  10.96902  11.544444 12.018969 12.094893
+ 12.319668 12.569418 13.494492 16.119864 16.394589]
+INFO:root: Encoder deltas:[-1756   870   978   980  1086  1139  1193  1194  1195  1196  1198  1247
+  1248  1250  1251  1302  1303  1304  1306  1307  1355  1356  1357  1358
+  1359  1360  1361  1362  1410  1411  1412  1413  1414  1415  1464  1466
+  1467  1469  1518  1519  1520  1522  1523  1525  1575  1577  1683  1736
+  1738]
+ counts:[  1   1   1   1   1   2   4   1   4   3   1   1   2   1   3   1   1   2
+   2   1  31 175 115  82 123 113  70   1   5   5   4   2   3   5   1   3
+   1   2   1   2   3   4   1   1   2   1   1   1   1]
+INFO:root:start_position=[ -66.32216  -255.88391   -30.072977]
+INFO:root: position over +/-1mm:[]
+INFO:root:METRICS:
+INFO:root:FAIL: 90% of data without indicator value test: 100.0% of samples triggered indicator value
+INFO:root:PASS: 2-second tracking loss test (allowed: 0 instances): 0 instances of 2 second data loss
+INFO:root:PASS: any-duration tracking loss test (allowed: 1 instance): 0 instances of data loss
+INFO:root:FAIL: 99% accurracy test (threshold 1mm): all data thrown out by indicator value
+INFO:root:FAIL: indicator value false negative test (threshold 1%): all data thrown out by indicator value
+INFO:root:FAIL: indicator value false positive test (threshold 10%): 100.0% false positive rate (0.1 indicator value with no 1mm deviation)
+INFO:root:tests failed: 2
+
+Process finished with exit code 0

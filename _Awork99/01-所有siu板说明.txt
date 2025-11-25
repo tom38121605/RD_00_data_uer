@@ -1,0 +1,99 @@
+
+new
+
+分支优先顺序：  develop >  master > 其他分支  
+    。如： 只要在在develop中有所使用的版本，分支就写develop
+    。如果develop有比现在使用的更新的版本，则需要在使用的版本上重新checkout那个org程序
+
+
+1. 10273： 发出sync信号
+   。nrf52840
+   。8个耳机孔，输出sync信号
+   。1个耳机孔，输入sync信号  （一般不使用）
+
+   。源程序： examples\ommo\ommo_sync_gen\10273-custom_8p_3v3-sync_generator
+   。现用版本为： develop-241207-53b87f2
+
+2. 12542   ：
+     。nrf52840    (已验证)
+     。三个接头连接sensor： MMA5983MA , 等    
+
+     。sensor接口 --mma5983 ： spi
+ 
+   。源程序：examples\ommo\ommo_sensor_sampler\12542-wired_microsd_3p_3v3-standard-3 
+   。现用版本为： develop-241207-53b87f2
+
+   。可用cnctestapp测试
+   。可用ommo_service 和 ommoApp测试， 可显示光标位置
+
+2. 12541 跟12542的区别：
+    。多了usb接口，通过usb接口引出了jlink和uart引脚
+    。多了充电芯片
+
+
+
+
+
+3. 11763 ：  （安装在asic测试板上的ti adc板上， 可输入TI的差分信号到xyz，然后输出到cnctestapp）
+     。nrf52840  
+     。输入TI的差分信号到xyz   
+     。可连pc和jlink
+     。用于跟asic信号的对比测试
+
+   。源程序： examples\ommo\ommo_adc_sampler_generic\11763-adc_sampler_3ch
+   。现用版本为： develop-240105-541aa24-V5004  
+    
+   。可用cnctestapp测试
+
+
+4.  11663B asic cartes_adc：   接收asic芯片板发来的i2c数据， 如xyzt   
+   。nrf52833  
+   。小板标识为1163A
+   。左边插入asic板   
+   。右边连转接头，转接头连PC，连耳机孔接收sync信号，连jlink烧录器
+
+     。sensor通讯接口 --ASIC ： I2C
+
+   。源程序：examples\ommo\ommo_adc_sampler_cartes\11663B-1p_microsd_2v8-adc_sampler_cartes
+   。现用版本为： cartes_adc-241121-254c9f6
+
+   。可用cnctestapp测试
+
+
+5.  11952：   接收sensor数据数据，上传数据到cnctestapp和ommoservice   （跟11663B asic cartes_adc用的同一块小板）
+   。nrf52833  
+   。小板标识为11663A
+   。左边插入sensor板，如： 双 MMA5983MA 板  
+   。右边连转接头，转接头连PC，连耳机孔接收sync信号，连jlink烧录器
+
+     。sensor通讯接口 --mma5983 ： SPI
+     。eeprom通讯接口 --24C16 ：I2C
+
+   。源程序：examples\ommo\ommo_sensor_sampler\11952-wired_1p_microsd_2v8-standard-3p0mm
+   。现用版本为： develop-241217-720aa95-V5018
+   。将用版本为： develop-250117-95c100f-V5020
+
+   。可用cnctestapp测试
+   。可用ommo_service 和 ommoApp测试， 可显示光标位置
+
+
+6.  13335：   新板
+   。nrf52840   
+   //。小板标识为1163A
+   //。左边插入sensor板，如： 双 MMA5983MA 板  
+   //。右边连转接头，转接头连PC，连耳机孔接收sync信号，连jlink烧录器
+
+   。源程序：examples\ommo\ommo_sensor_sampler\13335-usbc_12p_sensor_cal_3v3-standard-3p0mm
+   。现用版本为： develop-250117-95c100f-V5020
+
+
+   //。可用cnctestapp测试
+   //。可用ommo_service 和 ommoApp测试， 可显示光标位置
+
+
+
+
+
+
+
+

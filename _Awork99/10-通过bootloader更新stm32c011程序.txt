@@ -1,0 +1,42 @@
+﻿
+Jlink 4pin线插入方向：公头的白板面向母座的宽面  （两边都一样）
+
+烧录11663B的软件
+   11663B-1p_microsd_2v8-standard-3p0mm-PID65-v7004_RC3.zip   //Morgan用的是V7006 RC1
+
+
+烧写bootloader的hex文件到pointer的stm32芯片的步骤：
+
+  0. 从github上克隆下载 stm32_bootloader
+  0. 在最新目录C:\workspace\stm32_bootloader\flash_files
+     在目录250722-secured_sampler_01_otp_bootloader-Release00.07-036bfbd里面，
+     有一个 secured_sampler_01_otp_bootloader-00.07-036bfbd.hex文件，这个文件对本系列所有的stm32c011芯片都可用（如：pointer和patient都可用）
+
+  1. 用jlink v9烧录器（黑色普通jlink），在jflash软件上面，把上面bootloader的hex文件烧录到patient传感器板里面的stm32c011芯片中  
+     （菜单Tanget -- connect -- Production programming  //待验证）    
+
+  2. 把patient的stm32传感器板连接到11663b的MSIU板上， MSIU检测到最新的bootloader，会自动下载最新的程序到patient传感器板，此时1163b板底部会闪1-2秒左右的黄灯
+     （这一步如果没有看清黄灯，可返回到第1步，重新来一遍）
+
+  3. 因烧录bootloader时，擦除了旧的uuid，需烧录新的uuid到stm32c011芯片中 （需用calib软件取得旧的uuid，再用新的NP号码发给jonah，返回一个hdf5文件）
+     （详见： 校准标记01-写入标记到12605B-patient.png ）
+
+  4. 再和orbitpro一起，用ommo service测试，看连接和读取数据等功能是否正常
+
+
+补充1：  （第3步烧写uuid时的siu和device选择）
+
+    1.  patient reference
+         siu:       11663B
+         device:  12605B   （已验证）
+
+    2.  pointer
+         siu:       11663B
+         device:  12668B     (待进一步验证)
+
+ 
+
+
+
+
+

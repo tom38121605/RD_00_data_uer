@@ -1,0 +1,138 @@
+{
+   "common": {
+      "appName": "Ommo Hardware Test App",
+      "internetCheckerURL": "http://www.box.com",
+      "appLogDir": "logs/",
+      "firmwareBaseDir": "firmware/",
+      "nrfjprogPath": "C:/Program Files/Nordic Semiconductor/nrf-command-line-tools/bin/nrfjprog.exe",
+      "nrfutilPath": "C:/Program Files (x86)/Ommo Technologies/Firmware Updater App/utils/Scripts/nrfutil.exe",
+      "testLogDir": "Box/ORBIT_EVT",
+      "vendorId": [
+         "0x1915",
+         "0x3334"
+      ],
+      "productId": [
+         "0x0001",
+         "0x0002",
+         "0x0003",
+         "0x0011",
+         "0x0012",
+         "0x0013",
+         "0x0014",
+         "0x0016",
+         "0x0019",
+         "0x001A",
+         "0x001E",
+         "0x001F",
+         "0x0021",
+         "0x0022",
+         "0x0024",
+         "0x0028",
+         "0x0029",
+         "0x002A",
+         "0x002D",
+         "0x0034"
+      ],
+      "1": "10036 Basestation",
+      "2": "10036C Basestation Rev-C",
+      "3": "10036D Basestation Rev-D",
+      "17": "10095 SIU",
+      "18": "10096 SIU",
+      "19": "10103 Wireless Dongle",
+      "20": "10228 12 Port Sampler",
+      "22": "10230 12 Port Sample Mag13",
+      "25": "10146 MicroSD SIU",
+      "26": "10204 Micro 6 Port JST",
+      "30": "10128 Micro Wireless",
+      "31": "10260 Micro 6 Port FPC",
+      "33": "10327 12 Port MDK",
+      "34": "10328 Micro 6 Port JST V2",
+      "36": "10322 MicroSD 3 Port 3.3V",
+      "40": "10298 Secondary Cell Instrument",
+      "41": "10297 Wireless Pin Cell",
+      "42": "10448 Primary Cell Instrument",
+      "45": "10297B Mini Wireless Sensor",
+      "52": "10297D Mini Wireless Sensor"
+   },
+   "tests": {
+      "Base Station Performance Test": {
+         "enabled": true,
+         "type": "performance",
+         "testName": "performance",
+         "programBootloader": false,
+         "mbrHexFileName": "mbr_nrf52_2.4.1_mbr.hex",
+         "bootloaderHexFile": "10036d-basestation-bootloader-PID3-v5002.zip",
+         "uploadFirmware": false,
+         "firmwarePackage": "10036d-basestation-PID3-v5003.zip",
+         "productId": "0x0003",
+         "showPlot": true,
+         "saveToFile": true,
+         "testDuration_samples": 30030,
+         "startupDelay_samples": 60060,
+         "sampleInterval": 1,
+         "stddevWindowSize": 1000,
+         "passThreshold_mrad": 0.6,
+         "motorStopThreshold": 0.75,
+         "speedThreshold": 14.8,
+         "accelFOMThreshold": 1.056,
+         "formatBasestation": false,
+         "saveToBasestation": false,
+         "currentThreshold": 255,
+         "serialTimeout": 25000,
+         "testGroup": 0
+      },
+      "Master Firmware Updater": {
+         "enabled": true,
+         "internal": true,
+         "type": "master_firmware_updater",
+         "testName": "master_firmware_updater"
+      },
+      "EF TEST - 13335 48 PORT SIU": {
+      "enabled": true,
+      "type": "functional",
+      "testName": "functional",
+      "programBootloader": false,
+      "mbrHexFileName": "mbr_nrf52_2.4.1_mbr.hex",
+      "bootloaderHexFile": "13335-usbc_12p_sensor_cal_3v3-bootloader-PID76-v5020.hex",
+      "uploadFirmware": false,
+      "firmwarePackage": "13335-usbc_12p_sensor_cal_3v3-ef_test-3p0mm-PID76-v5020.zip",
+      "productId": "0x004C"
+      },
+      "Multi-Device Updater": {
+         "enabled": true,
+         "type": "multi_device_updater",
+         "testName": "Multi Device Updater"
+      },
+      "Base Station Functional Test": {
+         "enabled": true,
+         "type": "functional",
+         "testName": "functional",
+         "programBootloader": true,
+         "mbrHexFileName": "mbr_nrf52_2.4.1_mbr.hex",
+         "bootloaderHexFile": "10036d-basestation-bootloader-PID3-v5002.zip",
+         "uploadFirmware": true,
+         "firmwarePackage": "10036d-basestation-ef_test-PID3-v5002.zip",
+         "productId": "0x0003"
+      },
+      "Base Station RF Test": {
+         "enabled": true,
+         "type": "functional",
+         "testName": "basestation_rf_test",
+         "uploadFirmware": true,
+         "firmwarePackage": "10036d-basestation-rf_test-PID3-v5002.zip",
+         "productId": "0x0003"
+      },
+      "Theta PCB Functional Test": {
+         "enabled": true,
+         "type": "functional",
+         "testName": "functional",
+         "productId": "0x002C"
+      },
+      "Encoder PCB Functional Test": {
+         "enabled": true,
+         "type": "functional",
+         "testName": "functional",
+         "productId": "0x002B"
+      }
+   }
+}

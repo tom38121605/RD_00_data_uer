@@ -1,0 +1,77 @@
+Jlink 4pin线插入方向：公头的白板面向母座的宽面  （两边都一样）
+
+
+0. Orbitplus 软件版本：
+   12610b-wireless_basestation-bootloader-k1-PID9-v7007.hex      //v7008
+   12610b-wireless_basestation-standard-k1-PID9-v7007.zip
+
+   13151-usb_hub_receiver-bootloader-k1-PID84-v7007.hex          //v7008
+   13151-usb_hub_receiver-standard-k1-PID84-v7007.zip            //v7008
+
+   13151-usb_hub_scanner-bootloader-k1-PID85-v7007.hex           //v7008
+   13151-usb_hub_scanner-standard-k1-PID85-v7007.zip             //v70085
+ 
+
+0. SIU 软件版本：  //型号和版本，待确定
+
+   ？//13506-master_siu_2v8-bootloader-PID79-v7004_RC3.hex
+   ？//13506-master_siu_2v8-standard-3p0mm-PID79-v7004_RC3.zip
+
+
+0. 有线传感器软件版本：  //具体版本，待确定
+
+   13668
+
+ 
+
+
+1. 删除data文件，删除log 
+   。app的data目录里面的2个data文件和1个log文件
+   。service的log目录
+   。service的data目录里面的log文件
+
+2. 拔出电脑的usb充电线
+
+3. 插入orbitpro和传感器的两个usb
+
+4. 在命令行运行service-00.20.4-emc-cl
+
+5. 点击obs中的“开始录屏
+
+6. 按小写的r，开始获取数据。 15秒后，再按小写的r，结束获取数据。
+
+7. 按obs中的“结束录屏”
+
+8. 运行python分析文件 
+
+9. 拷贝下面文件到up目录
+   。app的data目录里面的2个data文件，和一个data图片文件
+   。service的log目录
+   。service的data目录里面的log文件
+   。obs的录屏文件
+
+
+
+注意1. 传感器13668插usb时，要压住usb接头，以免usb接头脱落
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,94 @@
+basestation二维码编号： 1219   
+//orbitpro二维码编号：    1371
+ 
+
+1. 用ommo service和 ommo app测试位置光标   （11952）
+
+   。硬件连接：
+      。basestation： 
+          . base型号： 或10036f
+          . 直接用A-C的usb线连接机子到PC  （不需要任何转接头）
+             a. 小灯白灯呼吸  
+
+      。SIU： 
+          . siu型号： 11952 (V5005, V5012)
+          . typec一端通过转接头连接PC, 另一端连sensor
+            a. 5678橙灯呼吸 -- 应是红灯电阻的原因    （1234白灯呼吸）
+
+      。sensor 型号：  MMC983 x2
+
+
+  。软件测试
+      。PC：  工厂测试电脑
+      。C:\workspace\ommo_eval_sdk_v0.19.0_d9a2_mm
+
+      。先双击打开ommo_service\ommo_service_v0.19.0.exe（可不需要管理员运行）， 运行ommo service
+           . 在  ommo service上显示如下：
+              a。err station:    0    
+              b。wireless:        start paring    
+              c。basestation 和siu都显示 idle    （要等5秒两个都显示idle，才進行下面的操作）
+              d。ommo service上的两个小灯都是灰色的    
+
+          . basestation和siu 都是蓝灯呼吸
+
+      。再双击ommo_app\ommoApp.exe（可不需要管理员运行）, 运行ommo app
+
+      。等待basestation启动，启动完毕后：
+
+           . 在ommo app上显示位置图标
+
+           . 在  ommo service上显示如下：
+              a。err station:    0    
+              b。wireless:        start paring    
+              c。basestation 和siu都显示 ruinning    
+              d。ommo service上的两个小灯变成绿色的    
+
+           . basestation和siu 都是显示绿灯呼吸 （siu一打开软件就绿灯，basestation启动完毕后才绿灯）
+
+   说明1：SIU和转接头，usb typc端翻过来插也是一样可以的
+   说明2：显示光标位置后，可以热插拔SIU
+   说明3：打开ommo_service后，要等5秒两个都显示idle，才進行下面的操作
+
+
+问题1： 不显示光标， 小灯偶尔闪一下绿灯，又变为白灯/或橙灯
+解决：  是接触不好，重新插一下sensor小板，ok
+
+
+2. 用cnctestapp取得SIU的软件版本，及测试接收传感器数据  （11952）
+ 
+    。硬件连接：
+
+      。SIU：   (只需连接SIU到电脑，不需要连basestation，不需要连sensor)
+          . siu型号： 11952 (V5005, V5012)
+          . typec一端通过转接头连接PC 
+
+      。sensor 型号： MMC983 x2
+
+  。软件版本测试：
+           . 在PC上打开cnctestapp
+           . 在串口设备的下拉列表中，找到11952的设备
+           . 点击open
+           . 在右边的AV是FW版本，如 5018，BV 是BOOTLOAD版本，如 5005
+
+  。测试sensor数据：
+           .  用耳机线，接入同步sync信号
+           .  小灯也是由蓝色呼吸，变成为绿色呼吸
+           .  在右边的PPS是数据频率，如 1001   （1khz）
+
+
+问题1： 插入同步信号耳机线时， 小灯偶尔闪一下绿灯，又变为白灯/或橙灯
+解决：  是接触不好，耳机线不能插入太浅，也不能插入太浅
+
+
+3. 通过firmware_updater看pid
+
+   打开firmware_updater  -- master firmware updater  -- scan hardware  -- Product ID
+
+
+
+
+
+
+
+
+

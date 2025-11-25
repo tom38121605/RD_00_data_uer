@@ -1,0 +1,26 @@
+
+跟V1.03的区别：
+
+1. 安装electronics_functional_test_app_v1.0.4.msi  （卸载V1.0.3）
+
+
+2. 13506的最新版本使用 v7006 RC1
+   13506-master_siu_2v8-k1-bootloader-PID79-v7006_RC1.hex
+   13506-master_siu_2v8-ef_test-k1-3p0mm-PID79-v7006_RC1.zip
+   13506-master_siu_2v8-standard-k1-3p0mm-PID79-v7006_RC1.zip
+
+
+3. 用蓝色JLINK代替菜单栏1，来烧录bootloader文件
+
+
+
+
+（其他相同）
+
+
+
+
+
+
+
+

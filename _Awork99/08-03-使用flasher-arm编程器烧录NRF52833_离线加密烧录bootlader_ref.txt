@@ -1,0 +1,33 @@
+
+
+烧录nrf82833的bootloader文件，跟stm32c011，区别是下面两个地方
+
+
+    
+1. 用13506的板子，代替STM32C011的板子
+
+4. 打开j-flasher软件， 配置好STM32C011工程 
+  
+   （就是打开jflash工程的时候，要配置为52833的工程）
+
+
+5.  导入要烧录的bootloader.hex文件后，增加了两个merge的步骤
+
+    .导入要烧录的hex文件，点击菜单 File -- open file data，导入文件 （如bootloader_c011.exe）
+
+    .merge "MBR"文件
+      菜单 file -- merge data file  --  选中 mbr_nrf52_2.4.1_mbr.hex 文件進行合并
+
+    .merge "readback protection"文件
+      1). 新建一个readback protection的文件, 文件名为 readBack.hex （文本文件格式），内容如下三行  //如果一有文件，忽略这一步
+
+:020000041000EA
+:0412080000000000E2
+:00000001FF 
+
+      2). 菜单 file -- merge data file  --  选中 readBack.hex 文件進行合并
+
+
+
+
+（其他步骤完全相同）

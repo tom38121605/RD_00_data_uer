@@ -1,0 +1,18 @@
+﻿basestation二维码编号： 1219   
+orbitpro二维码编号：    1371
+
+所有软件版本  V7004 RC3  (待验证)
+
+0. 先焊接jlink烧录接口，带一块中间板，有4个jlink插口，分别对应 12610，13151 receivex2， 13151 scanner
+
+一。烧录4个bootloader的hex文件
+  。运行 firmware_updater-V3.1.0  --  点击 master firmware updater  --  勾选show program bootloader
+  。jlink接中间板的12610档  --  选择12610的bootloader的hex文件，然后烧录
+  。jlink接中间板的13151的reciever档  --  选择13151的receiver的bootloader的hex文件，然后烧录
+  。jlink接中间板的13151的scanner档  --  选择13151的scanner的bootloader的hex文件，然后烧录
+
+
+一。update4个zip文件
+  。4个mcu共用一个usb接口，不需要切换中间板，也不需要连接中间板
+  。其他操作同以前的update
+

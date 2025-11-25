@@ -1,0 +1,101 @@
+﻿basestation二维码编号： 1219   
+orbitpro二维码编号：    1371
+
+一。数据抓取步骤：
+
+  0. 这里从机采样无线的pointer （orbitpro内部带无线接收器）
+  0. 把orbitpro插入到pc的usb口 （orbitpro是升级版的basestation）
+
+  0. 测试前先删除data0.hdf5和3个log文件  （testwizard里面的log不用删除 -- 测试名称可以很容易区分）
+
+  1. 进入目录：       C:\workspace\ommo_eval_sdk_v0.20.2\ommo_service
+
+  2. 在命令行中运行： ommo_service_v0.20.2.exe  log internal
+
+  3. 在托盘内找到ommo_service  -- open
+
+  4. 在ommo service会出现两个绿色圆点，分别是pointer（pcb图标），orbitpro内部的receiver（usb donger图标）
+
+  5. 运行 ommo app， 会出现第三个绿色圆点，是orbitpro本身，同时orbit内部的马达会开始启动。这时，ommo app坐标上面会出现一个光标，这是pointer中传感器的位置
+
+  6. 按shift键，进入英文输入模式，点击小写的L，开始抓取传感器数据，5秒后，再点击小写的L，停止抓取数据。
+
+  7. 会在目录 C:\workspace\ommo_eval_sdk_v0.20.2\ommo_app\data下生成一个新的数据文件 data0.hdf5
+  7. 会在目录 C:\workspace\ommo_eval_sdk_v0.20.2\ommo_app\data下生成一个新的数据文件 console_log_data0.txt
+  7. 会在目录 C:\workspace\ommo_eval_sdk_v0.20.2\ommo_service 下生成一个log目录，如 hardware_logs_20250825153659 
+  7. 会在目录 C:\workspace\ommo_eval_sdk_v0.20.2\ommo_service\data 下生成一个log文件，如 log-20250825-153658.txt
+
+ 
+二。ommoservice 数据分析步骤
+
+  0. 在pycharm中，安装3个组件： numpy，h5py，matplotlib
+
+  1. 在目录 C:\workspace\test_scripts中， 点击文件 emc_ommo_app_data_analysis.py
+
+  2. 在跳出的提示中， 选择已project方式打开，再选择相信这个project
+
+  3. 在该python文件中，修改目录为： 
+     file_name = "C:\\workspace\\ommo_eval_sdk_v0.20.2\\ommo_app\\data\\data0.hdf5"
+
+  补充1. 第一次用pychartm打开 .py文件时，会自动下载很多pycharm的内部文件，需要等待大约二十分钟直到下载完毕，再取下载组件numpy等
+  补充2. 有时打开py文件时，提示环境配置等错误，点击右上角齿轮 -- settings... -- 右边一列中 project... -- python interpreter -- 选择python的exe文件（或venv目录）
+
+
+
+三。Brainlab Test Wizard 数据抓取 （待完成）
+
+  1. 把目录SoftwareForOmmo_24062025，拷贝到 C:\workspace里面
+
+  2. 添加系统环境变量，
+     变量名： BRAINLAB_PATH ，变量值 C:\workspace\SoftwareForOmmo_24062025\TPA\VC143-i64-notoptimized-pdb-ddebug-shared-pchbin
+
+  3. 根据说明书EMC Analysis + Brainlab Test Wizard Guide-2025081815255493.pdf， 修改Ommo.yaml文件里面的设备参数
+
+  4. 运行 StartOmmoTrackingProviderApp.bat
+  5. 运行 TestWizard 2.3 Proto Ommo.exe
+  6. 在Configuration选项卡中，选择ommo
+  7. 在Execution选项卡中， 输入一个测试文件名，如 250822-01-1520.  勾选 "Run until manually stopped"。点击"Start Testrun"
+  8. 在状态栏的 "Starting" 的地方会依次显示: Connect → Set Tracker → Set Ref → Perform Reference → Start Measurement（同时状态栏变绿色）
+
+  9. 当指示灯静止且状态显示“PERFORM_REFERENCE”时（应为 Start Measurement），选择窗口并按下“r”键，即可在 Ommo App 上开始记录。此时，两个软件都会开始记录数据。
+
+  10.“r”键是 ommo_eval_v0.20.0 中的新热键，用于获取 Ommo App 日志并将串行数据记录到 CNC Test App 格式的 .hdf5 文件中。
+      如果使用之前的 ommo_eval，请使用小写的“L”键
+
+  //11. 当 TestWizard 指示灯变绿，且状态显示“RUNNING”时，如果正在运行失真，则从此时开始失真。   //无用，忽略这句
+
+  12. 当您准备停止收集时，请按测试向导中的“停止测试运​​行”按钮，然后快速切换到 Ommo 应用程序窗口并按“L”键停止记录（这里应是“r”键--已验证）
+
+
+
+四。Brainlab Test Wizard 数据分析 （待完成）
+
+    1. 下载github最新的emc_ommo_app_data_analysis_40hz_brainlab_metrics.py文件，和其他相关repo
+    2. 修改data0的filename  （注意，有可能生成的是data1，doublecheck）
+    //3. 修改hard的log文件名      //这个没有用到，忽略
+    4. 运行py文件
+    5，把testwizard截图
+
+
+六。orbitpro软件版本
+
+  1. orbitpro 软件：     12610-wireless_basestation-standard-PID6-v7004_RC3.zip
+  2. SIU软件接收：       13151-usb_hub_scanner-wireless_data_hub-PID72-v7004_RC3.zip
+  2. SIU软件发送：       13151-usb_hub_receiver-wireless_data_hub-PID71-v7004_RC3.zip
+
+
+七。basestation软件版本
+
+  1. orbit（原basestation） 软件： 10036f-basestation-standard-PID4-v7004_RC3.zip
+
+  2. SIU软件接收软件：             13151-usb_hub_scanner-wireless_data_hub-PID72-v7004_RC3.zip   //要么时这个
+  2. SIU软件发送软件：             13151-usb_hub_receiver-wireless_data_hub-PID71-v7004_RC3.zip  //要么时这个，带验证
+
+  3. usb dongle 接收头软件：       10103-usba_mdk_board-wireless_data_hub-PID19-v7004_RC3.zip
+
+
+
+
+
+
+

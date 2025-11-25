@@ -1,0 +1,417 @@
+Jlink 4pin线插入方向：公头的白板面向母座的宽面  （两边都一样）
+
+
+0. Orbitplus 软件版本：
+   12610-wireless_basestation-bootloader-PID6-v7004_RC3.hex
+   12610-wireless_basestation-standard-PID6-v7004_RC3.zip
+
+   13151-usb_hub_receiver-bootloader-PID71-v7004_RC3.hex         //RC5
+   13151-usb_hub_receiver-wireless_data_hub-PID71-v7004_RC3.zip  //RC5
+
+   13151-usb_hub_scanner-bootloader-PID72-v7004_RC3.hex          //RC5
+   13151-usb_hub_scanner-wireless_data_hub-PID72-v7004_RC3.zip   //RC5
+
+0. STM32C011的bootloader文件  （pointer和patient ref）
+   C:\workspace\stm32_bootloader\flash_files
+      目录： 250722-secured_sampler_01_otp_bootloader-Release00.07-036bfbd
+      文件： secured_sampler_01_otp_bootloader-00.07-036bfbd.hex
+
+0. 11663B的板子： 给上面的STM32C011芯片烧录程序 （亮黄灯）
+
+0. SIU 软件版本：  （Testwizard测试时，接pointer和patient ref的siu ）   //待doublecheck？
+
+   13506-master_siu_2v8-bootloader-PID79-v7004_RC3.hex
+   13506-master_siu_2v8-standard-3p0mm-PID79-v7004_RC3.zip
+
+
+0. patient ref 软件版本：
+   12605B ，写UUID的时候是12605B  (Bun说板子上或是12615)    //stm32c011的bootloader版本 0.7
+
+
+0. pointer软件版本：
+   12668B                             //stm32c011的bootloader版本 0.7
+
+
+
+
+疑问1： 如何设置 Ommo.yaml  （已解决）
+答：   保留说明书4行中的第一行    //对应一个pointer + 一个patient ref   
+
+
+疑问2： 打开“StartOmmoTrackingProviderApp.bat”， 是什么意思，是运行吗  （已解决）
+答：    就是直接运行  （运行前先设置环境变量 -- 已测试）
+
+疑问3： 下面这句怎么理解： If using distortion, begin that when TestWizard light turns green
+答：     就是等testwizard变绿，表示可以开始测量
+
+
+
+
+
+具体参考mp4视频文件
+
+EMC Analysis + Brainlab Test Wizard Guide  // EMC 分析 + Brainlab Test Wizard指南
+
+
+一。Overview   //概述  （主要是说 TestWizard和Ommo Service 采样的区别 ）
+
+    1. The purpose of this procedure is to sample data with Brainlab software and our software in parallel, replicating their results and metrics 
+        and having further analysis than their tools alone provide us.
+
+       此程序的目的是同时使用 Brainlab 软件和我们的软件进行数据采样，复制其结果和指标，
+       并进行比单独使用 Brainlab 软件所能提供的更深入的分析。
+
+    2. The fundamental difference between the way Brainlab's software (TestWizard) samples Ommo Service and the way Ommo App samples Ommo Service is 
+
+       Brainlab 软件 (TestWizard) 对 Ommo Service进行采样的方式 与 Ommo App 对 Ommo Service 进行采样的方式 之间的根本区别在于：
+
+       that TestWizard samples at 40hz with a moving average, and Ommo App samples at 1000Hz with no moving average. 
+       To replicate the data with Ommo App in post-processing, we downsample the data using a data frame method, and apply a moving average.
+
+       TestWizard 以 40Hz 的频率采样，并使用移动平均线；而 Ommo App 以 1000Hz 的频率采样，不使用移动平均线。
+       为了在后期处理中与 Ommo App 复制数据，我们使用数据帧方法对数据进行采样，并应用移动平均线。
+
+
+二。  Download Folder:     //下载目录(下载链接)
+
+
+三。  Test Setup   //测试搭建
+
+    1. Prior to beginning any tests, ensure test setups have been selected and all parts have been prepared ahead of time. Bring extras of everything you can. 
+       See below for general setup instructions and notes:
+
+       在开始任何测试之前，请确保已选择好测试设置并提前准备好所有部件。请尽可能携带所有备用件。请参阅以下常规设置说明和注意事项：
+
+    2. Place the test laptop at least 500mm from the instruments and base station， to avoid disturbing the signal at 【but】 the beginning of data logging.
+       将测试笔记本电脑放置在距离仪器和基站至少 500 毫米的位置，以避免在数据记录开始时干扰信号。
+
+       This can also be circumvented by remotely controlling the laptop， or using a mouse/ keyboard at a distance
+       也可以通过远程控制笔记本电脑或远距离使用鼠标/键盘来规避这个问题
+
+    3. Place instruments ~300mm from base station radially， if no EMC test fixture being used
+       如果未使用 EMC 测试夹具，则将仪器径向放置在距离基站约 300 毫米的位置 
+
+    4. Check and clear the environment for any sources of distortion ，such as large ferrous objects, motors, large electrical equipment, etc. 
+       检查并清除环境中的任何失真源，例如大型铁质物体、电机、大型电气设备等。
+
+    5. Plug in USB devices to the laptop.  
+       将usb设备插入到笔记本电脑
+
+    6. the base station will always plug in via a USB cable, but in some system setups the SIU will be wireless. In these cases, 
+       A wireless receiver should be plugged into the laptop unless a base station with an integrated receiver is used.
+       基站通常通过 USB 线缆连接，但在某些系统设置中，SIU 可能是无线的。在这种情况下，除非使用带有集成接收器的基站，否则应将无线接收器插入笔记本电脑。
+
+    7. Plug devices into battery, if applicable ，or power on battery powered devices, if applicable
+       如果适用，将设备插入电池，或打开电池供电的设备（如果适用）
+
+
+
+四。Procedure  //流程
+
+    这是一份概述。开始测试前请仔细阅读。
+
+    1. take a picture of the test setup prior to starting the test ，- save to correct test run folder during or after testing
+      在开始测试之前拍摄测试设置的照片 - 在测试期间或之后保存到正确的测试运行文件夹
+
+    2. Setup environment variable and configure "Ommo.yaml" - see TestWizard Extraction and Configuration in this document           //待理解
+       设置环境变量并配置“Ommo.yaml” - 请参阅本文档中的“TestWizard Extraction and Configuration”
+
+    3. Run Ommo Service in Logging Mode and Launch Ommo App - see Running Ommo Service In Logging Mode & Ommo App in this document
+       在日志模式下运行 Ommo 服务并启动 Ommo 应用 - 请参阅本文档中的“Running Ommo Service In Logging Mode & Ommo App”
+
+    4. Go to TPA build folder in ".../SoftwareForOmmo_xxxxx/TPA/VC143-i64-notoptimized-pdb-ddebug-shared-pch-bin/" and open "StartOmmoTrackingProviderApp.bat" //已理解
+       前往 TPA 构建文件夹“.../SoftwareForOmmo_xxxxx/TPA/VC143-i64-notoptimized-pdb-ddebug-shared-pch-bin/”，并打开“StartOmmoTrackingProviderApp.bat”
+
+    5. Naivgate to ".../SoftwareForOmmo_xxxxx/TestWizard/" and open "TestWizard 2.3 Proto Ommo.exe" to start running TestWizard.
+       导航至“.../SoftwareForOmmo_xxxxx/TestWizard/”，打开“TestWizard 2.3 Proto Ommo.exe”开始运行 TestWizard。
+
+    6. On "Configuration" tab, select "Ommo", then on "Execution" tab, enter the test name e.g. "(date)_(time)_(test_config)"
+       在“配置”选项卡中，选择“Ommo”，然后在“执行”选项卡中，输入测试名称，例如“(date)_(time)_(test_config)”。
+
+    7. Click "Start Testrun", and when comment says "PERFORM_REFERENCE", press the "r" key in ommo app to begin logging.   //待理解
+       If using distortion, begin that when TestWizard light turns green
+
+       点击“开始测试运行”，当注释显示“PERFORM_REFERENCE”时，按下 ommo app中的“r”键开始记录。
+       如果使用失真，请在 TestWizard 指示灯变绿时开始记录。
+
+    8. When you are ready to stop collection, press the "Stop Testrun" button in TestWizard, 
+       and quickly switch to the Ommo App windows and press the "r" key to stop logging.
+       当您准备停止数据收集时，请按下 TestWizard 中的“停止测试运行”按钮，然后快速切换到 Ommo APP窗口并按下“r”键停止记录。
+
+    9. Run the emc_ommo_app_data_analysis_40hz_brainlab_metrics.py， test script as described in Data Analysis in this document
+       按照本文档“数据分析”部分中的说明，运行 emc_ommo_app_data_analysis_40hz_brainlab_metrics.py 测试脚本。
+ 
+    10. With the Ommo App "data" file in a different folder, 
+        run the emc_ommo_app_data_analysis.py test script as described in [INTERNAL] “EMC Analysis Software Guide”    //另外的pdf文件
+        将 Ommo App 的“数据”文件放在不同的文件夹中，
+        按照 [INTERNAL] “EMC Analysis Software Guide” 中的说明运行 emc_ommo_app_data_analysis.py 测试脚本。
+
+    11. Save the test script output graphs, console text, setup picture, data file, and screenshot of TestWizard results in the correct test run folder.
+        将测试脚本输出图表、控制台文本、设置图片、数据文件和 TestWizard 结果的屏幕截图保存在正确的测试运行文件夹中。
+
+
+五。 TestWizard 提取和配置
+
+1. Save "SoftwareForOmmo_24062025" to "C:\workspace" to match path in  ".../SoftwareForOmmo_xxxxx/TestWizard/Application.yaml"     //easy
+   将“SoftwareForOmmo_24062025”保存到“C:\workspace”，以匹配“.../SoftwareForOmmo_xxxxx/TestWizard/Application.yaml”中的路径
+
+2. ensure you have the following "BRAINLAB_PATH" system environment variable saved as the path to the TPA build folder, as below.  //easy
+   note this must be a system variable, not a user variable  
+   确保已将以下“BRAINLAB_PATH”系统环境变量保存为 TPA 构建文件夹的路径，如下所示。
+   注意，这必须是系统变量，而不是用户变量
+   BRAINLAB PATH   C:\workspace\SoftwareForOmmo_24062025\TPA\VC143-i64-notoptimized-pdb-ddebug-shared-pch-bin 
+
+3. Naivgate to ".../SoftwareForOmmo_xxxxx/TestWizard/" and edit the "Ommo.yaml" file to fit your used devices.   //请看，pdf中有截图解释
+   导航到“.../SoftwareForOmmo_xxxxx/Test Wizard/”并编辑“Ommo.yaml”文件以适合您使用的设备。
+
+    。The "TrackerName" field will have to be edited to fit the devices you are using. Any device additional to the patient reference will have to be listed, 
+      but no more. The pictured configuration is for 2 points and 2 instrument trackers. 
+      您需要编辑“TrackerName”字段以匹配您正在使用的设备。除patient reference外，其他任何设备都必须列出，但仅此而已。图示配置适用于 2 points和 2 instrument trackers。
+
+      。For only 1 pointer, only keep "- PointerStraightExtended: Pointer1" under tracker name
+        如果只有 1 个指针，则仅在跟踪器名称下保留“- PointerStraightExtended: Pointer1”
+
+      。For only 1 pointer and 1 instrument tracker, only keep "- PointerStraightExtended: Pointer1" and "- RegistrationPointerMarkerArray: Adapter2" under tracker name, etc.
+        如果只有 1 个pointer和 1 个instrument，则仅在跟踪器名称下保留“- PointerStraightExtended: Pointer1”和“- RegistrationPointerMarkerArray: Adapter2”等。
+
+      。Patient reference does not get listed      
+        Patient reference未列出   （应是不需要列车）
+
+
+六。Running Ommo Service In Logging Mode & Ommo App  （easy，跟以前的操作基本一样）   //看pdf中有详图
+    运行日志模式下的OMMO service，运行ommo app
+
+    //1. 下载the latest version of Ommo Service (0.18x)    //忽略跳过
+        C:\workspace\ommo_eval_sdk_v0.20.0\ommo_service
+
+    2. 导航到the ommo_service folder，然后在命令行运行
+        ommo_service_v0.20.0.exe log internal  
+
+        。This will start an instance of ommo_service with serial logging enabled
+          这将启动一个启用串行日志记录的 ommo_service 实例。
+
+        。NOTE: the base station and siu(s) will remain in an idle state until ommo app is started
+          注意：基站和 SIU 将保持空闲状态，直到 ommo 应用启动。
+
+        。The ommo_service gui is accessible now via the system tray 
+          现在可以通过系统托盘访问 ommo_service gui
+
+        。In windows explorer, navigate to the Ommo_app folder in the ommo_eval_sdk directory
+          在 Windows 资源管理器中，导航到 ommo_eval_sdk 目录中的 Ommo_app 文件夹
+
+    3. Launch ommoApp //运行ommoApp
+       。Within seconds, the base station should begin rotating and when at full speed, the connected sensor(s) will show up on the ommoApp grid
+         几秒钟后，基站将开始旋转，当达到全速时，连接的传感器将显示在 ommoApp 网格上
+
+       。Ensure all sensors show up before moving to the next step
+         确保所有传感器都已显示，然后再进行下一步
+
+
+七。Running TestWizard with Ommo App   //通过 TestWizard  运行  Ommo App  （应是用  TestWizard 代替上面的Ommo Service ）  //看pdf中有详图
+    问：为何开启记录数据用r，结束记录数据用L
+
+    1. Goto TPA build folder and open   //进入 TPA 构建文件夹，打开
+       "StartOmmoTrackingProviderApp.bat" in ".../SoftwareForOmmo_xxxxx/TPA/VC143-i64-notoptimized-pdb-ddebug-shared-pch-bin/"
+
+       You should see connected siu uuids and and port numbers for all connected devices
+       您应该看到所有已连接设备的已连接 siu uuid 和端口号
+
+    2. Naivgate to ".../SoftwareForOmmo_xxxxx/TestWizard/" and open "TestWizard 2.3 Proto Ommo.exe" to start running TestWizard.
+       导航至“.../SoftwareForOmmo_xxxxx/Test Wizard/”，然后打开“Test Wizard 2.3 Proto Ommo.exe”以开始运行 TestWizard。
+
+    3. On the "Configuration" tab, select the configuration "Ommo"
+       在“配置”选项卡上，选择配置“Ommo”。
+
+    3. Go to "Execution" tab and enter a Test Name, e.g. "(date)_(time)_(test_config)"; "Run until manually stopped" should be checked
+       前往“执行”选项卡并输入测试名称，例如“(date)_(time)_(test_config)”；勾选“运行直至手动停止”
+
+    5. Bring Ommo App next to test wizard to start and stop test as close to the same time as possible
+       将 Ommo  App放在测试向导旁边，以便尽可能在同一时间启动和停止测试
+
+    6. Click "Start Testrun"    //点击“开始测试运行”
+
+    7. You will be taken to the following page. The status should say "Starting" and the comment should cycle through:       
+       您将进入以下页面。状态应显示“正在启动”，并且注释应循环显示：
+       Connect → Set Tracker → Set Ref → Perform Reference → Start Measurement
+
+    8. When the light is still and the status says "PERFORM_REFERENCE", start a log on Ommo App by selecting the window and pressing the "r" key. 
+       Both software's will be logging data at this point.
+       当指示灯静止且状态显示“PERFORM_REFERENCE”时，选择窗口并按下“r”键，即可在 Ommo App 上开始记录。此时，两个软件都会开始记录数据。
+
+         . TestWizard is taking a baseline dataset, and we will use this section of the Ommo App log for a baseline as well.
+           TestWizard 正在获取基线数据集，我们也将使用 Ommo App 日志的此部分作为基线。
+
+          .  The "r" key is a new hotkey in ommo_eval_v0.20.0 that will take an Ommo App log AND log the serial data in a CNC Test App formatted .hdf5 file. 
+            If using previous ommo_eval, use the lowercase "L" key.
+          “r”键是 ommo_eval_v0.20.0 中的一个新热键，用于获取 Ommo App 日志并将串行数据记录到 CNC Test App 格式的 .hdf5 文件中。
+           如果使用之前的 ommo_eval，请使用小写的“L”键。
+
+    9. When the TestWizard light turns green, and the status says "RUNNING", if running distortion, start distortion at this point.
+        当TestWizard灯变绿，并且状态显示“RUNNING”时，如果正在运行失真，则从此时开始失真。
+
+    10. When you are ready to stop collection, press the "Stop Testrun" button in TestWizard, 
+        and quickly switch to the Ommo App windows and press the "L" key to stop logging. 
+        当您准备停止收集时，请按测试向导中的“停止测试运行”按钮，然后快速切换到 Ommo 应用程序窗口并按“L”键停止记录。
+
+
+八。 Data Compilation    //数据汇编
+
+     1. Create a new folder for this test and store the following data in this folder
+        为本次测试创建一个新文件夹，并将以下数据存储在此文件夹中
+
+     2.Picture of test setup   //测试设置图片
+
+     3.Screenshot of TestWizard results page  //TestWizard 结果页面截图
+
+     4. Ommo App "datax.hdf5" file   
+        see  “[INTERNAL] EMC Analysis Software Guide”  Logging Data header
+        参见“[INTERNAL] EMC Analysis Software Guide”日志数据头
+
+     5. Ommo App "raw_data_x.hdf5" file
+        same location as "datax.hdf5" file  //与“datax.hdf5”文件位于同一位置
+
+     6. Ommo Service "hardware_log_xxxxx" folder
+        see  “[INTERNAL] EMC Analysis Software Guide”  Logging Data header
+        参见“[INTERNAL] EMC Analysis Software Guide”日志数据头
+
+
+
+九。Data Analysis    //数据分析
+
+    1. TestWizard will automatically begin postprocessing the data. There is no action needed for this.
+       TestWizard 将自动开始后处理数据。无需任何操作。
+
+    2. -- find a way to find siu uuid and port num
+       -- 找到 siu uuid 和端口号的方法
+
+    3. Open the "test_scripts.py" project in a Python IDE
+       • The only script you will need to run is emc_ommo_app_data_analysis_40hz_brainlab_metrics.py  //easy, 不需要翻译
+
+    4. Edit the variables for this test //修改下面的变量
+
+       • Change the "file_name" variable as indicated below to the data file you are processing    //修改file_name为现在的文件名
+       • Set reference to True if you are using a reference sensor                                 //如使用参考传感器，请将参考设置为 True
+       • If using a reference sensor, unput the siu uuid and port number for the reference sensor  //如使用参考传感器，请输入参考传感器的 siu uuid 和端口号
+
+    5. Run the script and when complete, a summary will be printed in the console window and a plot should appear
+       运行脚本，完成后，控制台窗口中会打印摘要，并会出现一个图表
+ 
+      • If using a reference sensor, the first plot and first summary in the python console will ALWAYS be the reference sensor's global metrics
+        如果使用参考传感器，python 控制台中的第一个图和第一个摘要将始终是参考传感器的全局指标
+ 
+      • Any following plots and summaries will be the tracking sensors in relation to the reference sensor
+        任何后续图表和摘要都将是相对于参考传感器的跟踪传感器
+
+    6. The resulting log and graphs will also be saved to the previously indicated directory
+       生成的日志和图表也将保存到先前指定的目录中
+
+
+十。 Typical Results & Interpretation    //典型结果和解释
+
+    1. Ommo EMC Script
+
+       For all metrics,                                                              //对于所有metrics
+       if sensor is a tracking sensor and a reference sensor is in use,              //如果传感器是 tracking sensor并且正在使用reference sensor
+       the results will be the tracking sensor in reference to the reference sensor  //结果将是tracking sensor在参考reference sensor
+ 
+
+
+    2. Metrics Calculations    //指标计算
+
+      • 90% of data without indicator value test:
+        90%的数据未(报警)指标值检验：
+
+         • As it says, calculates the percent of indicator value data above threshold   //正如它所说，计算指标值数据高于阈值的百分比     
+         • Pass if 90% is below threshold                                               //如果 90% 低于阈值，则通过
+
+      • 2-second tracking loss test:
+        2秒跟踪损失测试
+
+         • Calculates the number of instances of a tracking loss over 2 seconds long   //计算 2 秒内跟踪丢失的次数
+         • Tracking loss defined in 40 Hz downsampling section Pass if 0 per test      //40 Hz 下采样部分定义的跟踪损失，如果每次测试为 0，则通过
+
+      • Any duration tracking loss test   //任意持续时间跟踪损失测试        
+
+         • Calculates the number of instances of a tracking loss of any length       //计算任意长度的跟踪损失实例数
+         • Tracking loss defined in 40 Hz downsampling section                       //40 Hz 降采样部分定义的跟踪损失
+         • Pass if 1 or less per test                                                //如果每次测试的跟踪损失不超过 1 个，则通过
+
+      • 99% accuracy test (tracking stability):
+        99%准确度测试（跟踪稳定性）：
+
+         • Using moving average position with indicator flagged data thrown out          //使用移动平均位置，剔除指标标记的数据
+         • Calculates 99% accuracy tracking stability and % of data under 1mm deviation  //计算 99% 的跟踪稳定性准确度以及 1 毫米偏差以下的数据百分比
+         • Pass if 99% of data is under 1mm deviation                                    //如果 99% 的数据偏差在 1 毫米以下，则通过
+
+      • Indicator value false negative test
+        指标值假阴性检验
+
+         • Calculated the percent of data where position deviation is >1mm but indicator values does not pass threshold. //计算位置偏差>1mm但指标值未超过阈值的数据百分比
+         • This is just inverse of the 99% accuracy tracking stability test                                              //这只是 99% 准确度跟踪稳定性测试的逆向
+         • Pass if <1% false negative                                                                                    //如果假阴性<1%，则通过                                                                               
+
+
+      • Indicator value false positive test
+        指标值假阳性检验
+
+         • Calculated the percent of data where position deviation is not >1mm but indicator values does pass threshold. //计算位置偏差不大于1mm但指标值超过阈值的数据百分比。
+         • Pass if <10% false positive                                                                                   //如果误报率小于 10%，则为通过
+         • example of plot and script log                                                                                //图表和脚本日志示例
+
+     also, as of now encoder events are a bit off, still need to figure out how to handle them with 40hz downsampling
+     此外，截至目前，编码器事件还有点偏差，仍然需要弄清楚如何使用 40hz 下采样来处理它们
+
+
+
+十一。 Brainlab TestWizard    //Brainlab公司的TestWizard 软件使用
+
+   1. 运行软件，选择 Analysis选项卡  //这句说明书里没有 （在视频里）
+
+   2. Each tracking (not reference) device will will have each of the following fields:
+      每个跟踪设备（非参考设备）将具有以下每个字段：
+
+      ||V|| P99 (Reference)
+         • 99% accuracy with relation to the reference sensor        //相对于参考传感器，准确度达 99%
+         • Directly correlated to 99% accuracy test in EMC script    //与 EMC 脚本中 99% 准确度测试直接相关
+
+      ||V|| P95 (Reference)
+         • 95% accuracy with relation to the reference sensor        //相对于参考传感器，准确度达到 95%
+
+
+      ||V|| P99 (Measurement)
+         • 99% accuracy globally                                     //全球范围内准确率达 99%
+
+      ||V|| P95 (Measurement)
+         • 95% accuracy globally                                     //全球范围内准确率达 95%
+
+      ∆||V|| P99
+         • Delta between P99 Reference and P99 Measurement           //P99 Reference and P99 easuremen之间的差值
+
+
+      • Tracking False Negative Static   //追踪假阴性静态
+         • Number of samples where false negative (position deviation is >1mm but indicator value is <0.1). //假阴性样本数（位置偏差>1mm但指标值<0.1）
+ 
+         • Directly correlated to Indicator value false negative test in EMC script, though the EMC script measures % of samples not number of samples
+           与 EMC 脚本中的指标值假阴性测试直接相关，尽管 EMC 脚本测量的是样本百分比而不是样本数量
+
+      • False Negative continuous groups over 1s     //超过 1 秒的False Negative连续组      
+         • Number of groups where false negative for >1s   //False Negative时间 >1 秒的组数
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

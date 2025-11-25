@@ -1,0 +1,120 @@
+
+问题1： import ommo_io_defs as ommo 出现问题，找不到ommo_io_defs模块
+分析：  ommo_io_defs在上一级目录中
+分析：  以前打开另一个工程的uart.py文件在运行，之后没有关闭pycharm，叠加打开device calibration gui.py
+
+解决一：加入下面这段代码
+         #---------------------------------
+         import sys
+         from pathlib import Path
+         parent_dir = Path(__file__).parent.parent
+         sys.path.append(str(parent_dir))
+         #---------------------------------
+
+解决二：关闭所有在pycharm中打开的文件和工程，重新只打开运行 device calibration gui.py
+
+
+
+注意1：下面两个目录在github更新后，可能再次运行device calibration gui会出错，一般要拷贝回原来的以下两个目录：
+         C:\workspace\cnctestapplicationtestfiles-mihir
+         C:\workspace\cnctestapplication-mihir\bin\Release    （这个Release由同目录下的Release No VISA拷贝而来，是一样的）
+
+
+
+
+------------------------------------ mihir2 -----------------------------------------
+
+
+通过python校准写入uuid    
+
+   0. 在 "clear_device_info_before_write" 分支中，
+ 
+   0. 在pycharm中，安装下面的库： 
+      pyqt5，requests, pywin32，
+      serial，cobs，pyserial，protobuf，cryptography，semver，boto3，polling，psutil  (已验证 ok)
+
+      qrcode，brother-ql 待验证， pyvisa   
+
+
+
+   1. 运行 firmware_update
+   2. 在 master firmware updater中， 烧写bootload
+   3. 在MISU EF Test Firmware Update中， 自动更新standard的zip文件   //不同点 （不是eft的zip文件）
+
+   4. 运行python的device_calib软件   
+      进入目录C:\workspace\ommo_python_core\UI， 运行 device calibration gui 
+ 
+   5. siu 选 13506， device选13505，点setup   ，在右上角显示uuid和com口，pass
+   6. 勾选 “write uuid"， 点击run按钮 ，如果下面显示writed uuid，且没有错误提示，即ok
+
+
+
+mihir说明：    2025/9/9 0：07  //https://teams.microsoft.com/l/chat/19:01f85964ee3c40f58763cacb74ea1ab9@thread.v2/conversations?context=%7B%22contextType%22%3A%22chat%22%7D
+
+重点：feature\clear_device_info_before_write
+
+----------------
+
+can you compile and run device calibration gui directly from the code in "ommo_python_core"? This issue you are seeing is due to a change in the firmware which requires the flash to be cleared before writing any new info. If you have the ability to use the code directly, please use the "clear_device_info_before_write" branch, and try again. I will also try to get you an updated packaged version in the meantime.
+
+
+ I've uploaded an updated version of the "Ommo Electronics Functional Test App" here - https://drive.google.com/open?id=1QAWfdcn9dtGIdEeHTJt2HmBO9LQpWV8j&usp=drive_fs
+ 
+This version will enable programming bootloader and updating firmware through the same application where we run the EFT. There are some pre-requisites which need to be installed/downloaded for the nordic tools. (You may already have these, just may need to set the path in the settings file). I've included updated instructions as well, which describe what needs to change in the settings file according to your installed directories/paths.
+ 
+Please test it, and let me know if you run in to any issues!
+
+
+
+
+------------------------------------ mihir3 -----把校准后的增益值写入到传sensor里-----------------------------------
+
+参考文档： Flash gains on sensor devices.pdf    
+
+1. 分支下载master
+
+    下载第三方库： qrcode， brother-ql 待验证， pyvisa   (在mihir2的基础上添加)
+
+
+2. In the “device_calibtation.ini” file, add a variable - “development=1”
+
+3. 把13668的固件，从新版本V7010, update到旧版本V6009
+
+4. 选择SIU type为 13668 ANALOG ADC, 选择device type为 13810 ANALOG ADC VTRAN，再点击setup，在右边可以看到显示device1和相关端口号
+
+5. 勾选“Write Device UUIDs”和“Create Custom UUIDs”，在文本框内填入sensor的UUID:  4906743876170649207， 点击“run”
+   你将在状态栏看到一条新的信息
+
+6. 在选项卡“Upload Gains” , 点击 “Select Gain File”，选择文件 sensor_calibration.hdf5， 点击“run”
+ 
+7. 如果成功，会显示  uuids were flashed successfully     //有时会先跳出一个红x的提示，忽略它跳过，然后会显示successfully信息
+
+
+
+
+If so it's possible you may have erased the sensor calibration gains from the siu. The analog adc siu keeps the cal on the siu flash since there is no eeprom like our other devices.
+ 
+You'll have to use the device calibration gui to write the old device uuid, and then upload the calibration gains. Have you done this before? If not let me know, I can send you some instructions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

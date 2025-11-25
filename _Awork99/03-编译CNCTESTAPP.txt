@@ -1,0 +1,26 @@
+
+ 0. 下载安装 Visual Studio 2022    （详见： RD_01_ide_visualstudio）
+
+1. 从github上clone最新的cnctestapplication
+
+2. 双击 C:\workspace\cnctestapplication\CNCTestApplication.sln
+
+3. 菜单 Build\Configuration Manager...
+   。在Active  solution configuration的下来列表中，选择 Release No VISA
+   。close
+
+3. 菜单 Build\Rebuild CNCTestAppliction, ok
+
+3. 编译结果：目录“C:\workspace\cnctestapplication\bin” 中的 Release No VISA目录就是所要的结果  --ok
+
+
+
+
+
+ 
+
+
+
+
+
+

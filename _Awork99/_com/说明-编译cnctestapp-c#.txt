@@ -1,0 +1,5 @@
+
+Did you pull ommo build common 
+and call generate protobuf .bat file. 
+And are you building the ¡°no visa¡± configuration?
+

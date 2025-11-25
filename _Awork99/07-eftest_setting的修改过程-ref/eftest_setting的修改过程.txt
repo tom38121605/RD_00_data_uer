@@ -1,0 +1,29 @@
+
+1. 修改C:\Program Files (x86)\Ommo Technologies\Firmware Updater App\settings.json文件
+
+    。打开里边有一个"tests": 
+
+    。加上我下边的这段代码就可以
+
+       
+
+        "EF TEST - 13335 48 PORT SIU": {
+        "enabled": true,
+        "type": "functional",
+        "testName": "functional",
+        "programBootloader": false,
+        "mbrHexFileName": "mbr_nrf52_2.4.1_mbr.hex",
+        "bootloaderHexFile": "13335-usbc_12p_sensor_cal_3v3-bootloader-PID76-v5020.hex",
+        "uploadFirmware": false,
+        "firmwarePackage": "13335-usbc_12p_sensor_cal_3v3-ef_test-3p0mm-PID76-v5020.zip",
+        "productId": "0x004C"
+        },
+
+
+2. 5020的13335 那几个release firmware需要复制到firmware updater app根目录下的firmware的文件夹
+
+
+
+
+
+

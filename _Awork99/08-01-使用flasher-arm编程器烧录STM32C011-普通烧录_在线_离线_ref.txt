@@ -1,0 +1,66 @@
+
+
+0. flasher arm编程器的引脚 和 jlink的引脚，编号上是一样的
+0. flasher arm的VTref引脚没有输出电压不能向目标板供电， 而jlink一般有输出电压 （或可以向目标板供电--待验证）
+
+0.  准备好两个指令
+     securearea create      //创建加密分区
+     securearea remove      //删除加密分区
+
+0. flasher使用说明网址  
+    https://kb.segger.com/UM08022_Flasher                            //有硬件引脚图等 
+    https://kb.segger.com/Flasher_-_Working_with_Flasher
+
+
+
+------------------------------- 普通连线烧录 ------------ok-----------------------
+
+1. 连接flasher arm上的 swdio, swclk, VTref, gnd ， 到STM32C011板
+
+2. 把flasher arm 插入到pc， 用其他的usb电源给STM32C011板上电
+
+3. 打开j-flasher软件， 配置好STM32C011工程
+
+4. 导入要烧录的hex文件，点击菜单 File -- open file data，导入文件
+
+5. 点击菜单 Target  -- connect， 一般会连接成功，查看successful信息
+
+6. 点击菜单 Target  -- production Programming， 一般会烧录成功，查看successful信息
+
+
+------------------------------- 普通的离线独立烧录 ------（待验证）-----------------------------
+
+1. 连接flasher arm上的 swdio, swclk, VTref, gnd ， 到STM32C011板
+
+2. 把flasher arm 插入到pc， 用其他的usb电源给STM32C011板上电
+
+3. 打开j-flasher软件， 配置好STM32C011工程
+
+4. 导入要烧录的hex文件，点击菜单 File -- open file data，导入文件
+
+5. 点击菜单  File -> Download config & data file to Flasher， 一般会下载成功，查看successful信息（ 不需要先connect）
+
+6. 断开目标板电源， 从PC拔出flasher arm
+
+7.  先按住PROG按钮，用usb线连接flasher arm 到  PC， 然后flasher arm变成一个u盘
+
+8. 看u盘里面的文件，有下面2个文件：
+   1).  Flasher.cfg
+   2).  Flasher.dat
+
+9. 在U盘创建一个Cntdown.txt文件， 里面写入数字1000， 即可以烧写1000次
+
+10.  拔出flasher编程器，然后不按PROG按钮，在普通模式下，把flasher编程器 插入PC，等待指示灯变绿  
+
+11. 编程器Flasher 现在配置为独立模式，可以与 PC 断开连接，只需使用 USB 电源即可运行
+
+12. 插入要烧录的板子，然后按PROG按钮开始编程。绿灯表示烧录成功，红灯表示烧录失败。 
+
+13.  先按住PROG按钮，用usb线连接flasher arm 到  PC， 然后flasher arm变成一个u盘； 看里面的log文件，如果烧录成功则增加一栏ok，如果烧录失败则增加一栏err。
+
+14. Cntdown.txt 文件仅在一次刷写成功时才会递减，当其达到 0 时设备将停止刷写
+
+
+
+
+

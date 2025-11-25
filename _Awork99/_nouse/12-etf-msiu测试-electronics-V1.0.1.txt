@@ -1,0 +1,102 @@
+Jlink 4pin线插入方向：公头的白板面向母座的宽面  （两边都一样）
+
+
+0.  安装 firmware_updater_v3.1.0_external.msi  （注意：是 external ）
+0.  安装 electronics_functional_test_app_v1.0.1 .msi      // 这里先不考虑 electronics_functional_test_app_v0.0.2_1b554b0.msi          
+0.  安装  nrf-command-line-tools-10.24.2-x64.exe  （一路默认安装）
+
+
+0. 下面的文件拷贝到目录：C:\Program Files (x86)\Ommo Technologies\Firmware Updater App\firmware
+    13506-master_siu_2v8-bootloader-PID79-v7004_RC5.hex
+    13506-master_siu_2v8-ef_test-3p0mm-PID79-v7004_RC5.zip
+    13506-master_siu_2v8-standard-3p0mm-PID79-v7004_RC5.zip
+    mbr_nrf52_2.4.1_mbr.hex
+
+
+0. 下面的文件拷贝到目录：C:\Program Files (x86)\Ommo Technologies\Firmware Updater App
+    settings.json
+
+0. 修改electronics app  的settings.json文件，版本号修改成下面的内容
+    13506-master_siu_2v8-bootloader-PID79-v7004_RC5.hex
+    13506-master_siu_2v8-ef_test-3p0mm-PID79-v7004_RC5.zip
+    13506-master_siu_2v8-standard-3p0mm-PID79-v7004_RC5.zip
+
+
+
+0.  横向开关， 拨到SWD档       (另一边是  USB)
+0.  纵向开关1，拨到VBUS档       (另一边是  OFF)
+0.  纵向开关2，拨到PD档          (另一边是  SYNC)
+
+//0. 补充： 检查 nrfutil.exe在下面的目录里      //这一步一般可忽略 安装firmware时自动带入
+      C:\Program Files (x86)\Ommo Technologies\Firmware Updater App\utils\Scripts
+      C:\Program Files\Nordic Semiconductor\nrf-command-line-tools\bin
+
+
+一。烧录13506的bootloader，更新zip文件 （当前版本 V7005 RC5）
+
+   0. 连接jlink和usb两条线到电脑
+
+   1.  运行 firmware_update
+
+   2. 在master firmware updater中， 烧写bootload      //横向开关拨向SWD端
+      。有时要先点一下上面的stop update
+
+   3. 在MISU EF Test Firmware Update中， 自动更新eft的zip文件       //横向开关拨向USB端  （这个功能也可以在master firmware updater中操作）
+
+
+
+二。测试electric 
+
+   4. 先不关掉firmware_update界面，运行electronics
+   5. 选项框SIU ETF, 勾选 RUN EF TEST ，点击Run
+       。小灯会闪烁
+       。显示电流
+       。hold down
+       。hold up
+       。usb off
+
+
+
+
+
+
+补充一：目前的3pin线，4pin线，接MSIU fixture端，都是白屏朝上
+
+
+补充二， 校准写入uuid          //看是否需要
+
+    参考： 校准标记05-通过python校准-Mihir.txt
+
+ 
+
+补充二：目前的3pin线，4pin线，接MSIU fixture端，都是白屏朝上
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
