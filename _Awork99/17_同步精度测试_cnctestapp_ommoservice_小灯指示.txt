@@ -38,7 +38,7 @@
 
 03. 测试三华机子，软件烧录测试11952D （如有synch test的版本，则烧录带synch test的版本）   
 
-   12223无线接收器：
+   12223无线接收器： （以前烧录的是10103 最新版本V7012 RC0）
       12223-mini_usba_transceiver-bootloader-PID61-v7011_RC1.hex     
       12223-mini_usba_transceiver-standard-PID61-v7011_RC1.zip       //V7012 RC0 也可
 
