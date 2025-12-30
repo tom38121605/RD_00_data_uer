@@ -69,7 +69,7 @@ Please test it, and let me know if you run in to any issues!
 
 ------------------------------------ mihir3 -----把校准后的增益值写入到传sensor里-----------------------------------
 
-参考文档： Flash gains on sensor devices.pdf    
+参考文档： Flash gains on sensor devices.pdf      //...\05-device_calibration_app_install\
 
 1. 分支下载master
 
@@ -85,7 +85,8 @@ Please test it, and let me know if you run in to any issues!
 5. 勾选“Write Device UUIDs”和“Create Custom UUIDs”，在文本框内填入sensor的UUID:  4906743876170649207， 点击“run”
    你将在状态栏看到一条新的信息
 
-6. 在选项卡“Upload Gains” , 点击 “Select Gain File”，选择文件 sensor_calibration.hdf5， 点击“run”
+6. 在选项卡“Upload Gains” , 点击 “Select Gain File”，选择文件 sensor_calibration.hdf5， 点击“run”  //...\05-device_calibration_app_install\cali_mihir3_back_可显示write_uuid\
+ 
  
 7. 如果成功，会显示  uuids were flashed successfully     //有时会先跳出一个红x的提示，忽略它跳过，然后会显示successfully信息
 
