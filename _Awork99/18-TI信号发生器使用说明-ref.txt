@@ -1,0 +1,42 @@
+
+
+ 测试步骤：
+
+一。TI板设置  （输出波形）
+
+   0. 硬件：连接TI板到电脑usb接口，上电
+
+   1. 先把TI的PC软件，拨到Disable
+   2. 设置offset （0.6v）， VPP(0.06v)， 100Hz。  再设置 Sine  +  Differential
+   3. 检查上面5项，确认无误后， 点击enable 
+
+
+二。在python中，设置ASIC板，读取数据和显示图形
+
+   0.  硬件： 用示波器量TI板的输出电压x2，确认电压正常 （0.6v - 0.06v * gain32 = 0.12v >0 , 无负电压）
+   0.  硬件： 确认电压正常后，把TI的out+, out- 两根线连接到ASIC板的x+，x-
+   0.  硬件： 连接ASIC的usb板到电脑
+
+   1.  在电脑上的python软件， 设置gain， vref等参数
+   2.  运行python软件， 确认IIC读取的寄存器是正确的  （iic的线连接无松动）
+
+   3. （可选，把pga输出到cnctest时一定不要运行） ， 在python中，点击回车键，读取数据在python中并打印出图形
+
+
+三。cnc读取数据
+
+   0.  硬件： 连接basestation的同步信号到nrf52板，同时basestation的usb接口上电 （不一定要接电脑供电）
+   0.  硬件： nrf52板的usb连接电脑 （供cncapp使用）
+
+   1. 打开cnctestapp3  -- open  --  test control  -- 输入filename（也可默认） -- logger test  --  输入测试时间  --  start test
+   2. 打开hdf5view  -- open  --  打开上面生成的hdf5文件  --  点击Logging Test 。。。 
+   3.  --  双击data 选中其中一列， 点上面的图标   --  显示图形
+   4.  --  双击data  --  import/export data  --  export data to  -- text file  --  输入文件名  --  点击保存
+
+
+
+
+    
+   
+
+
