@@ -54,7 +54,7 @@ basestation二维码编号： 1219
 解决：  是接触不好，重新插一下sensor小板，ok
 
 问题2： ommo service上的两个小灯变成绿色，但没有光标
-解决： 是sensor段接触不好
+解决： 是sensor段接触不好 （也可能是某个稳压ldo不稳定）
 
 
 2. 用cnctestapp取得SIU的软件版本，及测试接收传感器数据  （11952）
