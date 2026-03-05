@@ -1,5 +1,8 @@
-
 zeroplus 整理：
+
+软件下载网址：  （型号为 LAP-C 16032）    //待验证
+   https://www.zeroplus.com.tw/logic-analyzer_cn/technical_support_search.php
+
 
 1. 增加总线协议
    1）。在左边空白栏点右键\ 增加A0, 再同样增加A1, 
@@ -18,6 +21,4 @@ zeroplus 整理：
 5. 如果看读入的波形，需要修改 mode0  --> mode1
 
 6. 保存配置文件.alc
-
-
 
