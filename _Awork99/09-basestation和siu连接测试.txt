@@ -15,7 +15,7 @@ basestation二维码编号： 1219
           . typec一端通过转接头连接PC, 另一端连sensor
             a. 5678橙灯呼吸 -- 应是红灯电阻的原因    （1234白灯呼吸）
 
-      。sensor 型号：  MMC983 x2
+      。sensor 型号：  MMC5983 x2
 
 
   。软件测试
@@ -55,6 +55,7 @@ basestation二维码编号： 1219
 
 问题2： ommo service上的两个小灯变成绿色，但没有光标
 解决： 是sensor段接触不好 （也可能是某个稳压ldo不稳定）
+解决2：  siu跟sensor连接处的座子往后退一下，即ok （仅限接触不良的情况）
 
 
 2. 用cnctestapp取得SIU的软件版本，及测试接收传感器数据  （11952）
