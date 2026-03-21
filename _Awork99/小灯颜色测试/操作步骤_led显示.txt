@@ -1,0 +1,82 @@
+
+==================== 测试ASIC板 ====11663B================
+
+PC测试软件： CNC4  （不右键管理员打开也可以）
+
+操作步骤：
+
+    1. 硬件连接
+        。小板金手指朝下插入
+        。花排线金手指朝上插入
+    2. 连接usb到PC
+       。先插入sync到转接板，再连接电脑usb   （不需sync版本的软件，也可去掉转接板）
+       。如果不考虑uart等其他功能，usb正反两面的方向都可插入连接
+    3. 通电后，I2C未通讯，但可看到SCL和SDA两条线都是高电平
+    4. 在电脑上打开CNC4, 点击open
+        。PPS显示数字 1001.0  （不需sync信号版本软件）
+        。示波器的SCL和SDA显示时钟和数据波形
+        。小灯变成绿灯呼吸
+        。注意pc上控制台上的显示，如果GetPacketDescriptor没有通过，则可能花排线的SCL, SDA, VCC, GND其中有一根没有连通
+    5. 如果刚烧录过软件，需重新拔插一下usb
+
+一： 带syc信号版本的软件
+
+   SIU板插上usb电源：
+   1.  不打开cnctestapp，不接syc信号：    白灯呼吸
+   2.  不打开cnctestapp，连接syc信号：    白灯呼吸
+
+   3.  打开cnctestapp（open），不接syc信号：    蓝灯快闪      //可以open成功 （getdesriptor这一步可以通过）， 但pps无数据NaN
+   4.  打开cnctestapp（open），连接syc信号：    绿灯长亮     //pps有数据3676.5
+   5.  打开cnctestapp（open），断开syc信号：    蓝灯快闪     //pps变成无数据NaN
+
+
+   补充:  闪红灯时，要拔插usb电源重新上电
+
+问题1： 有时插入syc信号，绿一下后马上又变回蓝灯快闪。
+分析：  一般是没有卡紧同步信号，或接触不好
+解决： 先重新拔插一下usb电源，再多次检查syc线是否正确插入和完好接触
+
+二： 不带syc信号版本的软件
+
+   SIU板插上usb电源：
+   1.  不打开cnctestapp，不接syc信号：    白灯呼吸
+   2.  不打开cnctestapp，连接syc信号：    白灯呼吸
+
+   3.  打开cnctestapp（open），不接syc信号：    绿灯呼吸            //pps有数据1001.0
+   4.  打开cnctestapp（open），连接syc信号：    绿灯长亮            //pps有数据1001.0
+   5.  打开cnctestapp（open），断开syc信号：    绿灯保持长亮      //pps有数据1001.0
+
+
+
+
+==================== 测试adc板 ==11763==================
+
+PC测试软件： CNC3 (或CNC1, CNC4 )
+
+一： 带syc信号版本的软件
+
+   SIU板插上usb电源：
+   1.  不打开cnctestapp，不接syc信号：    白灯呼吸
+   2.  不打开cnctestapp，连接syc信号：    白灯呼吸
+
+   3.  打开cnctestapp（open），不接syc信号：    绿灯快闪      //可以open成功 （getdesriptor这一步可以通过）， 但pps没有数据NaN
+   4.  打开cnctestapp（open），连接syc信号：    绿灯长亮      //pps有数据3676.5
+
+   5. 关闭cnctestapp（close），连接syc信号：     白灯呼吸
+
+   补充:  闪红灯时，要拔插usb电源重新上电
+
+问题1： 点open可以打开，但只是快闪蓝灯，接sync后也是快闪蓝灯，数据一直是0.0
+解决：  重新设置一下calibration， 就会变成闪绿灯，接sync后常亮绿灯
+
+问题2： 用update软件烧录后，马上点open可以打开，但只是快闪蓝灯，接sync后也是快闪蓝灯，数据一直是0.0
+解决：  重新拔插usb电源，确保上电初始是闪白灯的，再点open打开
+
+
+
+
+
+
+
+
+
