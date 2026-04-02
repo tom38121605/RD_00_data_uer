@@ -1,4 +1,4 @@
-参考:  EP-100161_B Axon Synchronization Accuracy Test DV Protocol.docx.pdf
+﻿参考:  EP-100161_B Axon Synchronization Accuracy Test DV Protocol.docx.pdf
 
 注意1： 10036f用v7011 RC1，才能显示3000Hz
 注意2： 要用旧版本的cnctestapp，无线接收器12223才能显示1000hz

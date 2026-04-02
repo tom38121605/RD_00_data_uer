@@ -12,7 +12,7 @@ orbitpro二维码编号：    1371
   。jlink接中间板的13151的scanner档  --  选择13151的scanner的bootloader的hex文件，然后烧录
 
 
-一。update4个zip文件
+一。依次update4个zip文件
   。4个mcu共用一个usb接口，不需要切换中间板，也不需要连接中间板
   。其他操作同以前的update
 

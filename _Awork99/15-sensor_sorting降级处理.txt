@@ -1,11 +1,11 @@
 ﻿
-原因的实现目标：
+原因,实现目标：
 
 。因认证需要，Shenji需要较旧的固件版本 
 。因BL，设备的数据结构发生了变化
-。7xxx SIU（11663B V7010） 读取 device info                                   //***
+。第一片SIU 7xxx （11663B V7010） 读取 sensor的device info                                   //***
 。读取的device info传到pc的gui软件，gui软件再把device info数据结构转换
-。pc把数据结构转换后的device info传给5xxx SIU（11663B V5027）
+。pc把数据结构转换后的device info传给第二片SIU 5xxx （11663B V5027）
 。5xxx SIU（11663B V5027）把新的device info，写回到sensor板中，并验证         //***     
 
 

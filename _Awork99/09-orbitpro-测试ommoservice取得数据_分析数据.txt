@@ -3,7 +3,7 @@ orbitpro二维码编号：    1371
 
 一。数据抓取步骤：
 
-  0. 这里从机采样无线的pointer （orbitpro内部带无线接收器）
+  0. 这里从机采样  无线的pointer （orbitpro内部带无线接收器）
   0. 把orbitpro插入到pc的usb口 （orbitpro是升级版的basestation）
 
   0. 测试前先删除data0.hdf5和3个log文件  （testwizard里面的log不用删除 -- 测试名称可以很容易区分）

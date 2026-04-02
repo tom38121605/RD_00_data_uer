@@ -33,7 +33,6 @@
 
 
 
-
 疑问1： 如何设置 Ommo.yaml  （已解决）
 答：   保留说明书4行中的第一行    //对应一个pointer + 一个patient ref   
 
@@ -43,7 +42,6 @@
 
 疑问3： 下面这句怎么理解： If using distortion, begin that when TestWizard light turns green
 答：     就是等testwizard变绿，表示可以开始测量
-
 
 
 
