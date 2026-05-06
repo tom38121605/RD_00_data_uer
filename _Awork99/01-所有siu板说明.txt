@@ -84,7 +84,7 @@ new
    //。右边连转接头，转接头连PC，连耳机孔接收sync信号，连jlink烧录器
 
    。源程序：examples\ommo\ommo_sensor_sampler\13335-usbc_12p_sensor_cal_3v3-standard-3p0mm
-   。现用版本为： develop-250117-95c100f-V5020
+   。现用github版本为： develop-250117-95c100f-V5020
 
 
    //。可用cnctestapp测试
@@ -92,7 +92,7 @@ new
 
 
 
-7.  break board 连接板__
+7.  break board 连接板
     。单翅板:  12246 -A -00
 
    。双翅板：  11918 - ENG1
