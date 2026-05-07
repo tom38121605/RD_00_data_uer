@@ -1,27 +1,31 @@
 
-详情查看微信群聊天 （搜 11911 或 13335）
+参考： 详情查看微信群聊天 （搜 11911 或 13335）
 
-一。硬件连接
+
+==============================  一。 烧录和测试ef软件  ===================================
+
+
+1。硬件连接
       。把12块 子板插在母版上
       。把usb线连接pc和板子
       。把jlink （M）依次连接板子上的四个端口
 
 
-二。软件烧录：  （先不烧录，下面测试时，一组一组烧录）
+2。软件烧录：  （先不烧录，下面测试时，一组一组烧录）
 
-   1. 把新的setting.json，拷贝到 firmware updater app根目录下的firmware的文件夹     //一定要 （添加13335的菜单）
+   1). 把新的setting.json，拷贝到 firmware updater app根目录下的firmware的文件夹     //一定要 （添加13335的菜单）
 
-   2. 5020的13335 那几个release firmware，复制到firmware updater app根目录下的firmware的文件夹       //再测试看可否省掉这一步
+   2). 5020的13335 那几个release firmware，复制到firmware updater app根目录下的firmware的文件夹       //再测试看可否省掉这一步
 
        bootloaderHexFile": "13335-usbc_12p_sensor_cal_3v3-bootloader-PID76-v5020.hex 
        firmwarePackage": "13335-usbc_12p_sensor_cal_3v3-ef_test-3p0mm-PID76-v5020.zip 
 
-   3. 在电脑上，打开firmware updater app烧录
+   3). 在电脑上，打开firmware updater app烧录
       。用平常的方法，同时烧录上面的bootload文件和zip文件
       。会提示successful
 
 
-三. 第1组子板的小灯测试和ef测试
+3. 第1组子板的小灯测试和ef测试
 
    。先用jlink 和 firmware updater app 烧录第1组（前三个子板）
 
@@ -33,12 +37,12 @@
 
    。同样把4个11911的sd卡小板依次插在第2排和第3排子板上  （这时子板显示白灯）
    。在电脑上，打开firmware updater app，在13335菜单上测试ef
-   。依次测试各项功能，会显示pass   
+   。依次测试各项功能，会显示pass   （同时查看小灯闪烁红绿蓝三色）
     
    。第1组的三排都测试完成后，会显示绿色长条总pass
 
 
-四. 第2组子板的小灯测试和ef测试
+4. 第2组子板的小灯测试和ef测试
   
    。先用jlink 和 J-Flash lit 擦除第1组的程序
    。先用jlink 和 firmware updater app 烧录第2组 
@@ -55,9 +59,40 @@
     
    。第2组的三排都测试完成后，会显示绿色长条总pass
 
-五. 再依次同样测试第3，4组
+5. 再相同的方法依次测试第3，4组
 
-六. 再烧录standard软件， 把12块子板都插上，看48个小灯，是否都闪烁红绿蓝3种颜色
+
+==============================  二。 烧录和测试standard软件 ===================================
+
+1. 再依次烧录4个mcu的standard软件 -- 把12块子板都插上 -- 再插上3个 12252A的sensor
+
+2. 搭建python的gui测试环境
+
+    。在下面的目录中找到ommo_python_core-20260206的备份
+          D:\tool\tool_OMMO\_OMMO_tools\05-device_calibration_app_install\
+
+    。按照“新版本的calibration的修改和运行过程2.txt”， 配置python环境
+
+    。运行 device_calibration_gui.py ， 选择
+          。SIU Type： 13335 48 PORT PALLET FIXTURE
+          。Device Type： 12252A SINGLE MAG CABLE SENSOR OVERMOLDED HOUSING
+
+    。点击setup  --  显示已连接的12252A的SIU  --  插12252A的子板上显示黄灯
+
+
+
+
+
+==============================  三。 cnctestapp 测试 ===================================
+
+
+1. 硬件连接
+    。连接母板到pc
+    。连接同步信号到母板
+
+2. 运行cnctestapp， 抓取数据
+
+
 
 
 
