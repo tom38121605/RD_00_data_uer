@@ -1,0 +1,40 @@
+﻿
+1. log 的所在位置
+
+   。app的data目录里面的2个data文件和1个log文件
+   。service的log目录
+   。service的data目录里面的log文件
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
