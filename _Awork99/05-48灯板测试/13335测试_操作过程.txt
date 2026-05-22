@@ -27,9 +27,9 @@
 
 3. 第1组子板的小灯测试和ef测试
 
-   。先用jlink 和 firmware updater app 烧录第1组（前三个子板）
+   。先用jlink烧录器 和 firmware updater app 烧录第1组（前三个子板）
 
-   。取下jlink，只用usb连接板子和pc
+   。取下jlink烧录器 ，只用usb连接板子和pc
 
    。把4个11911的sd卡小板插在第1排子板上  （这时子板显示白灯）
    。在电脑上，打开firmware updater app，在13335菜单上测试ef
@@ -44,10 +44,10 @@
 
 4. 第2组子板的小灯测试和ef测试
   
-   。先用jlink 和 J-Flash lit 擦除第1组的程序
-   。先用jlink 和 firmware updater app 烧录第2组 
+   。先用jlink烧录器  和 J-Flash lit 擦除第1组的程序
+   。先用jlink烧录器  和 firmware updater app 烧录第2组 
 
-   。取下jlink，只用usb连接板子和pc
+   。取下jlink烧录器 ，只用usb连接板子和pc
 
    。把4个11911的sd卡小板插在第4排子板上  （这时子板显示白灯）
    。在电脑上，打开firmware updater app，在13335菜单上测试ef
