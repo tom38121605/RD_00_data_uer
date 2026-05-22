@@ -71,7 +71,12 @@
 
 ==============================  二。 烧录和测试standard软件 ===================================
 
-1. 再依次烧录4个mcu的standard软件 -- 把12块子板都插上 -- 再插上3个 12252A的sensor
+1. 烧录standard软件
+
+   。依次烧录4个mcu的standard软件
+   。把12块子板都插上
+   。此时，母板上的4个小灯为白色
+
 
 2. 搭建python的gui测试环境
 
@@ -80,12 +85,17 @@
 
     。按照“新版本的calibration的修改和运行过程2.txt”， 配置python环境
 
+3. 在python中运行 device_calibration_gui，并测试
+
     。运行 device_calibration_gui.py ， 选择
           。SIU Type： 13335 48 PORT PALLET FIXTURE
           。Device Type： 12252A SINGLE MAG CABLE SENSOR OVERMOLDED HOUSING
 
-    。点击setup  --  显示已连接的12252A的SIU  --  插12252A的子板上显示黄灯
+   。再插上12个 12252A的sensor   （我们这里只插了3个）
+   。此时，母板上的4个小灯为白色
 
+   。点击setup  --  显示已连接的12252A的SIU  --  插12252A的子板上显示黄灯
+   。此时，母板上的4个小灯为绿灯  （待测试验证）
 
 
 
@@ -97,6 +107,7 @@
     。连接同步信号到母板
 
 2. 运行cnctestapp， 抓取数据
+    。open后，相应的母板上的小灯会由白色变绿色
 
 
 
