@@ -327,6 +327,18 @@
 
 
 
+===================12223 ， 10103 硬件机子参考网址 =================================
+
+
+1.  https://raytac.blog/2024/07/10/firmware-coding-dfu-onto-mdbt50q-rxuser-manual-of-mdbt50q-cx-nrf52840-usb-c-dongle/     //官方讲解， 有原理图和源代码
+
+2.  https://www.raytac.com/product/ins.php?index_id=156    //easy  忽略
+
+
+3.  https://item.taobao.com/item.htm?id=612437888017&mi_id=00004ZbW6fV-SPdiBEa6s4tJt9Q6of0VrugcWfBrVG6gZwo&spm=tbpc.boughtlist.suborder_itemtitle.1.7ed32e8dqrRzzf      //旧版 淘宝售卖地址
+
+
+
 
 
 
