@@ -1,4 +1,5 @@
 ﻿参考:  EP-100161_B Axon Synchronization Accuracy Test DV Protocol.docx.pdf
+         详见 D:\tool\tool_OMMO\_OMMO_tools\00_wk_test_no_app_all\01-Synchronization Accuracy Test
 
 注意1： 10036f用v7011 RC1，才能显示3000Hz
 注意2： 要用旧版本的cnctestapp，无线接收器12223才能显示1000hz
@@ -8,7 +9,7 @@
 
 01. 测试深圳机子，软件烧录测试12542 （如有synch test的版本，则烧录带synch test的版本）   //ok
 
-   12223无线接收器：
+   12223无线接收器： （10103？）
       12223-mini_usba_transceiver-bootloader-PID61-v7011_RC1.hex      //先用Firmware Updater烧录，如果不行，再用segger的J-Flasher lite烧录
       12223-mini_usba_transceiver-standard-PID61-v7011_RC1.zip        //用Firmware Updater烧录
 
@@ -93,7 +94,7 @@
    . 11658 OMMO USB-C TO USB-A CABLE, 5M                         //5米长的连接线
    . 11918_B USB Programming and Test Breakout Board             //双翅连接板
 
-   . 12223 Wireless Receiver (Firmware 6003)                    //12223无线接收器
+   . 12223 Wireless Receiver (Firmware 6003)                    //12223无线接收器 （后面会更新V7011 RC1）
    . 12246 USB TEST BOARD                                       //单翅连接板            
 
    . Oscilloscope                                               //示波器
