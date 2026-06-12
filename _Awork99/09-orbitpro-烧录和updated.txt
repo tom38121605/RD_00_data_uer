@@ -1,5 +1,5 @@
-﻿basestation二维码编号： 1219   
-orbitpro二维码编号：    1371
+﻿basestation二维码编号： 1219   // 或10036f 待验证
+orbitpro二维码编号：    1371   // 或12610，13151 receivex2， 13151 scanner 待验证
 
 所有软件版本  V7004 RC3  (待验证)
 
