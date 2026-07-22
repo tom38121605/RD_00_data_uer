@@ -19,7 +19,7 @@ LCD板， 在lcd端粗条花纹朝下，master板也是粗条花纹朝下
 0. 烧录11663B的软件
    11663B-1p_microsd_2v8-standard-3p0mm-PID65-v7004_RC3.zip   //Morgan用的是V7006 RC1
 
-0.  打开目录"C:/Program Files (x86)/Ommo Technologies/Electronics Functional Test App"里的electronics_functional_test.ini文件，检查下面内容
+0.  打开目录"C:/Program Files (x86)/Ommo Technologies/Electronics Functional Test App"里的electronics_functional_test.ini文件，检查下面内容   //在V1.04中或不需要
 
     [DEFAULT]
     log_files_directory=c:/workspace/logs/
@@ -65,7 +65,7 @@ LCD板， 在lcd端粗条花纹朝下，master板也是粗条花纹朝下
    12359-usbc_charger_tester_3v3-standard-PID75-v7004_RC5.zip
 
 0. 烧录10273的hex文件 （同步信号发送板）
-   这个hex文件在github上没有，是ommo通过微信或邮件发送给Bun的 （或也可以通过源程序编译生成）
+   这个hex文件在github上没有，是ommo通过微信或邮件发送给Bun的 （或也可以考虑通过源程序编译生成）
 
 
 0. 把MSIU EFT fixture板，sync generator板，Jlink烧录器， charger test板 连在一起，再通过usb hub连接到电脑
